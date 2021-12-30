@@ -159,15 +159,22 @@ Discuz! 对接：
 -------------------
 
     通用：
-    通过参数r和已定义的常量MODULEIDEN判断调用的控制器
-    在web目录下以MODULEIDEN方式建立模块路由器
+    通过参数id调用指定模块
+    通过参数id和参数r调用指定模块的控制器
     主应用：web/index.php?r=controllerName/actionName
-    子应用：web/levroom/index.php?r=controllerName/actionName
+    子应用：web/index.php?r=controllerName/actionName&id=MODULEIDEN
 
     discuz路由机制：
-        主应用：/plugin.php?id=levroom&r=controllerName/actionName
-        子应用：/plugin.php?id=levroom:iden&r=controllerName/actionName
+        主应用：/levs.php?id=levroom&r=controllerName/actionName
+        子应用：/levs.php?id=levroom:iden&r=controllerName/actionName
         
+URL美化`(rewrite伪静态)`
+-------------------
+
+    伪静态使用单独入口文件 `levs_rewrite.php` 以便于不影响动态入口。
+    动态入口文件 `levs.php` 
+    服务器配置好伪静态后，在管理后台开启即可。
+    伪静态规则详见后台文档
         
 
 
