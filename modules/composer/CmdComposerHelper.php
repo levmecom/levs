@@ -66,18 +66,22 @@ class CmdComposerHelper
 
         foreach ($editFilesToWebroot as $file) {
             if (is_file($file)) {
-                $data = file_get_contents($file);
-                if ($data && stripos(trim($data), '<?php') === 0) {
+                $data = ltrim(file_get_contents($file));
+                if ($data && stripos($data, '<?php') === 0) {
                     foreach ($replaceVar as $k => $r) {
                         $data = str_replace($k, $r, $data);
                     }
-                    $data = str_ireplace('<?php', '<?php include '.$configFile.'; ', $data);
+                    //$data = str_ireplace('<?php', '<?php include \''.$configFile.'\'; ', $data);
+                    $data = '<?php include \''.$configFile.'\'; '.substr($data, 5);
                     file_put_contents($file, $data, LOCK_EX);
                 }
             }
         }
 
-        echo "\n".'恭喜，文件下载成功！系统使用及安装步骤：'."\n".'1.将【'.$webroot.'】整个目录下文件移动到网站根目录；'."\n".'2.然后访问目录进入安装界面！';
+        echo "\n".'恭喜，文件下载成功！系统使用及安装步骤：'
+            ."\n".'1.将【'.$webroot.'】整个目录下文件复制到网站根目录；'
+            ."\n".'2.然后访问目录进入安装界面！'
+            ."\n";
     }
 
     public static function installLevs() {
