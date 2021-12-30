@@ -11,6 +11,11 @@
     "php": ">=5.4.0",
     "levmecom/levs": "*"
   },
+  "scripts": {
+    "post-package-install": [
+      "modules\\levs\\modules\\composer\\CmdComposerHelper::postPackageInstall"
+    ]
+  },
   "repositories": [
     {
       "type": "vcs",
