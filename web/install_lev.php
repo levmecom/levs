@@ -311,26 +311,20 @@ if (!empty($_POST['dosubmit'])) {
 
             <div class="card-footer">
                 <div class="flex-box">
+                    <inpt class="item-input" style="max-width: 220px;">
+                        <select class="form-control" name="pro">
+                            <option value="1">生产环境</option>
+                            <option value="0">开发环境</option>
+                        </select>
+                    </inpt>
                     <inpt class="item-input">
-                        <label class="control-label">
-                            <input type="checkbox" style="vertical-align: middle" name="dropTab" value="1">
-                            删除相同前缀的表
-                        </label>
+                        <select class="form-control wd80" name="dropTab">
+                            <option value="0">无操作</option>
+                            <option value="1">删除相同前缀的表【如果你是重装可以选择】</option>
+                        </select>
                     </inpt>
                 </div>
             </div>
-
-            <div class="card-footer">
-                <div class="hint-block"></div>
-                <inpt class="item-input" style="max-width: 220px;">
-                    <label class="control-label">部署</label>
-                    <select class="form-control" name="pro">
-                        <option value="1">生产环境</option>
-                        <option value="0">开发环境</option>
-                    </select>
-                </inpt>
-            </div>
-
 
 
             <div class="card-footer">
