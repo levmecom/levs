@@ -46,17 +46,21 @@ class CmdComposerHelper
 
         $webroot = realpath(dirname(__DIR__) . '/../web');
 
-        $configFile = __DIR__ . '/const.config.php';
+        $runtimeroot = dirname($webroot) . '/runtime';
+        is_dir($runtimeroot) || mkdir($runtimeroot);
+
+        $configFile = '/const.config.php';
+        $configFileroot = $runtimeroot . '/composer.const.config.php';
 
         $replaceVar = [
             '{{#vendor}}' => $appv_vendor,
-            '{{#configFile}}' => $configFile,
+            '{{#configFile}}' => $configFileroot,
         ];
-        $configData = file_get_contents($configFile);
+        $configData = file_get_contents(__DIR__ . $configFile);
         foreach ($replaceVar as $k => $r) {
             $configData = str_replace($k, $r, $configData);
         }
-        file_put_contents($configFile, $configData, LOCK_EX);
+        file_put_contents($configFileroot, $configData, LOCK_EX);
 
         $editFilesToWebroot = [
             $webroot . '/gate.php',
@@ -72,7 +76,7 @@ class CmdComposerHelper
                         $data = str_replace($k, $r, $data);
                     }
                     //$data = str_ireplace('<?php', '<?php include \''.$configFile.'\'; ', $data);
-                    $data = '<?php include \''.$configFile.'\'; '.substr($data, 5);
+                    $data = '<?php include \''.$configFileroot.'\'; '.substr($data, 5);
                     file_put_contents($file, $data, LOCK_EX);
                 }
             }

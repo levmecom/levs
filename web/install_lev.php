@@ -320,6 +320,17 @@ if (!empty($_POST['dosubmit'])) {
                 </div>
             </div>
 
+            <div class="card-footer">
+                <div class="hint-block"></div>
+                <inpt class="item-input" style="max-width: 220px;">
+                    <label class="control-label">部署</label>
+                    <select class="form-control" name="pro">
+                        <option value="1">生产环境</option>
+                        <option value="0">开发环境</option>
+                    </select>
+                </inpt>
+            </div>
+
 
 
             <div class="card-footer">

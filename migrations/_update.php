@@ -90,10 +90,18 @@ class _update extends _migrationHelper
     }
 
     public static function createLevsGate() {
+        Lev::GPv('pro') && is_file($file = __DIR__ . '/data/_lev_dev.bin') && @unlink($file);
 
         if (Lev::$app['isDiscuz']) {
             is_file($__file = __DIR__ . '/data/levs_discuz.php') &&
             file_put_contents(Lev::$aliases['@webroot'] . '/levs.php', str_ireplace('!defined(', '//!defined(', file_get_contents($__file)));
+        }
+
+        if (defined('APPV_VENDOR')) {
+            $dir = __DIR__;
+            is_file($file = $dir . '/install_lev.php') && @unlink($file);
+            is_file($file = $dir . '/gate.php') &&
+            file_put_contents($dir . '/levs.php', file_get_contents($file), LOCK_EX) && @unlink($file);
         }
 
         if (!Lev::isDeveloper('levs')) {
