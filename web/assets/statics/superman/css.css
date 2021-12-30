@@ -1,0 +1,26 @@
+
+/* form */
+textarea, input, select, .html
+{font-size: 12px; padding:2px; border:1px solid; border-color:#666 #ccc #ccc #666; background:#F9F9F9; color:#333; resize: none; }
+
+.toolbar-superman.toolbar {height: 28px !important;}
+.toolbar-superman .toolbar-inner {justify-content: space-between !important;}
+
+.pages .navbar.adminbar.navbar-bgcolor-red {
+    background: #60BFDF !important;
+    color: #fff;
+    height: 36px !important;
+}
+.pages .page.page-admin .navbar.adminbar .subnavbar {
+    height: 30px;
+    top: 36px !important;
+}
+
+.pages .page.page-admin {overflow-x: auto;overflow-y: hidden;}
+.pages .page.page-admin .navbar,
+.pages .page.page-admin .page-content-inner,
+.pages .page.page-admin .page-content {min-width: 960px !important;}
+.pages .page.page-admin .page-content {padding-top: 60px !important;background: #fefefe !important;}
+.pages .page.page-admin .data-xtable.listx td img {max-height: 40px}
+
+.button.color-blackg {background: #666464 !important;}
