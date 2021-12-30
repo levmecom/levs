@@ -1,0 +1,36 @@
+{
+  "name": "levmecom/levs",
+  "description": "Lev 模块化开发",
+  "minimum-stability": "dev",
+  "keywords": ["模块化开发", "嵌入式开发", "离散性开发", "分布式开发", "小性化开发"],
+  "homepage": "https://appstore.levme.com",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Levme.com",
+      "email": "227248948@qq.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "ext-json": "*",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "lev\\": "lev/",
+      "modules\\": "/.."
+    }
+  },
+  "scripts": {
+    "post-package-install": [
+      "modules\\levs\\modules\\composer\\CmdComposerHelper::postPackageInstall"
+    ]
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://gitee.com/levmecom/levs"
+    }
+  ]
+}
