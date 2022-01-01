@@ -36,7 +36,7 @@ class CmdComposerHelper
         }
 
         $name = basename($installedPackage->getName());
-        $message = "########################\n{$name}\n";
+        $message = '';
         if ($name === 'levs') {
             static::copyWebFiles();
             $message .= "\n文件初始化完成\n########################";
