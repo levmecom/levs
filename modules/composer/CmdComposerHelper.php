@@ -36,7 +36,8 @@ class CmdComposerHelper
         }
 
         $name = basename($event->getName());
-        $message = "########################\n{$name}";
+        $name = (array)$event;
+        $message = "########################\n{$name}\n".print_r($name, true);
         if ($name === 'levs') {
             static::copyWebFiles();
             $message .= "\n文件初始化完成\n########################";
