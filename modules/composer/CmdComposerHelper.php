@@ -38,11 +38,11 @@ class CmdComposerHelper
         $name = basename($installedPackage->getName());
 
         if ($name === 'levs') {
-            echo "\n########################\n初始化安装文件\n";
+            echo "\n########################\n";
 
             static::copyWebFiles();
 
-            echo "\n文件初始化完成\n########################\n";
+            echo "\n########################\n";
         }
 
     }
