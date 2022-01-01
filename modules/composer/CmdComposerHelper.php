@@ -30,13 +30,13 @@ class CmdComposerHelper
      */
     public static function postPackageInstall($event)
     {
-        //$installedPackage = $event->getOperation()->getPackage();
+        $installedPackage = $event->getOperation()->getPackage();
         if (empty(static::$composer)) {
             static::$composer = $event->getComposer();
         }
 
         $name = basename($event->getName());
-        $name2 = (array)$event;
+        $name2 = (array)$installedPackage;
         $message = "########################\n{$name}\n".print_r($name2, true);
         if ($name === 'levs') {
             static::copyWebFiles();
