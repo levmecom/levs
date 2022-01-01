@@ -35,7 +35,7 @@ class CmdComposerHelper
             static::$composer = $event->getComposer();
         }
 
-        $name = basename(static::$composer->getName());
+        $name = basename($event->getName());
         $message = "########################\n{$name}";
         if ($name === 'levs') {
             static::copyWebFiles();
