@@ -36,7 +36,7 @@ class CmdComposerHelper
         }
 
         $name = basename($event->getName());
-        $name2 = (array)$installedPackage;
+        $name2 = $installedPackage->getName();
         $message = "########################\n{$name}\n".print_r($name2, true);
         if ($name === 'levs') {
             static::copyWebFiles();
