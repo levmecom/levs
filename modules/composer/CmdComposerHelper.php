@@ -35,9 +35,8 @@ class CmdComposerHelper
             static::$composer = $event->getComposer();
         }
 
-        $name = basename($event->getName());
-        $name2 = $installedPackage->getName();
-        $message = "########################\n{$name}\n".print_r($name2, true);
+        $name = basename($installedPackage->getName());
+        $message = "########################\n{$name}\n";
         if ($name === 'levs') {
             static::copyWebFiles();
             $message .= "\n文件初始化完成\n########################";
