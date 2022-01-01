@@ -30,14 +30,19 @@ class CmdComposerHelper
      */
     public static function postPackageInstall($event)
     {
-//        $installedPackage = $event->getOperation()->getPackage();
-//        if (empty(static::$composer)) {
-//            static::$composer = $event->getComposer();
-//        }
-//        var_dump(static::$composer->getConfig());
+        //$installedPackage = $event->getOperation()->getPackage();
+        if (empty(static::$composer)) {
+            static::$composer = $event->getComposer();
+        }
 
-        static::copyWebFiles();
+        $name = basename(static::$composer->getName());
+        $message = "########################\n{$name}";
+        if ($name === 'levs') {
+            static::copyWebFiles();
+            $message .= "\n文件初始化完成\n########################";
+        }
 
+        echo $message;
     }
 
     public static function copyWebFiles() {
