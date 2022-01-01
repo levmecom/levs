@@ -312,7 +312,7 @@ if (!empty($_POST['dosubmit'])) {
             <div class="card-footer">
                 <div class="flex-box">
                     <inpt class="item-input" style="max-width: 220px;">
-                        <select class="form-control" name="pro">
+                        <select class="form-control" name="pro" style="min-width: 120px">
                             <option value="1">生产环境</option>
                             <option value="0">开发环境</option>
                         </select>
