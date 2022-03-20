@@ -21,7 +21,7 @@ class levsHelper extends \lev\base\Modulesv
 {
 
     public static $mud = [
-        'version' => '1.0.210621',
+        'version' => '1.0.2.210621',//
     ];
 
     public static function init()

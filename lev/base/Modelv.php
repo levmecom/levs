@@ -30,6 +30,34 @@ class Modelv extends Migrationv
         return static::quoteTableName($tableName, $prefix);
     }
 
+    /**
+     * 格式表数据ID字段到名称
+     * @param array $sv 列表中单条数据
+     * @param array $lists 列表数据
+     * @param string $srhField
+     * @param string $keyField
+     * @param string $showField
+     * @return array $sv;
+     */
+    public static function formatListvField($sv, $lists, $srhField = 'uid', $keyField = 'id', $showField = 'username', $findFields = '*') {
+        static $arrvs;
+        if (!isset($arrvs[$srhField])) {
+            ($ids = Lev::getArrayColumn($lists, [$srhField])) &&
+            $arrv = static::findAllField($findFields, [$keyField.' IN ('.implode(',', $ids).')'], $keyField);
+            isset($arrv[0]) ||
+            $arrv[0] = [$keyField => 0, $showField => ''];
+            $arrvs[$srhField] = $arrv;
+        }else {
+            $arrv = $arrvs[$srhField];
+        }
+        $kv = $srhField;
+        if (isset($sv[$kv])) {
+            $sv[$kv] = '<a href="' . Lev::toCurrent([$kv => $sv[$kv]]) . '">'
+                . $sv[$kv] . '@<br>' . Lev::arrv([$sv[$kv], $showField], $arrv, '#已丢失#') . '</a>';
+        }
+        return $sv;
+    }
+
     public static function insert($data, $returnInsertId = false) {
         return dbHelper::insert(static::tableName('', 0), $data, $returnInsertId);
     }

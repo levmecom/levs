@@ -121,6 +121,11 @@ class Lev extends LevHelper
         Lev::$app['Icp'] = Lev::stget('Icp', 'levs');
     }
 
+    public static function checkHideT()
+    {
+        return Lev::stget('SiteName', 'levs') == '-';
+    }
+
 }
 
 

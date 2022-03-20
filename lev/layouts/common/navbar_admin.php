@@ -22,6 +22,8 @@
 
 <div class="navbar page-admin-navbar adminbar navbar-bgcolor-red">
     <div class="navbar-inner">
+
+        <?php if (!Lev::checkHideT()):?>
         <div class="left transl" style="transform: scale(.97)">
             <?=\lev\widgets\adminModulesNav\adminModulesNav::buttonHtm()?>
             <a class="link tooltip-init" href="javascript:window.history.back();" data-tooltip="后退">
@@ -43,6 +45,8 @@
             </a>
             <?php endif;?>
         </div>
+        <?php endif;?>
+
         <div class="title">
             <?php echo Lev::$app['title']?>
             <tips class="date inblk" style="color:yellow !important;"><?=$tips?></tips>

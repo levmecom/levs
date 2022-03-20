@@ -17,6 +17,7 @@ use lev\base\Widgetv;
 use lev\helpers\ModulesHelper;
 use lev\helpers\ScoreHelper;
 use lev\helpers\UrlHelper;
+use lev\helpers\UserHelper;
 use modules\levmb\helpers\levmbSetHelper;
 
 !defined('INLEV') && exit('Access Denied LEV');
@@ -38,6 +39,14 @@ class loginWidget extends Widgetv
         if (Lev::$app['uid'] >0) return '';
 
         return static::loadScreen($show);
+    }
+
+    public static function loginAvatarBtn() {
+        $cls = Lev::$app['uid'] <1 ? 'openLoginBtn' : 'is_ajax_a" href="'.UrlHelper::my(0);
+        return '<a class="link icon-only '.$cls.'">
+                    <img class="date bradius lazy" data-src="'.UserHelper::avatar().'">
+                    '.Lev::$app['username'].'
+                </a>';
     }
 
     public static function loadScreen($show = true) {

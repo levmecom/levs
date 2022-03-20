@@ -19,6 +19,7 @@ namespace modules\levs\migrations;
 use Lev;
 use lev\base\Adminv;
 use lev\base\Migrationv;
+use lev\controllers\SupermanController;
 use lev\helpers\cacheFileHelpers;
 use lev\helpers\dbHelper;
 use lev\helpers\ModulesHelper;
@@ -48,7 +49,20 @@ class _install extends Migrationv
         inputsWidget::setCaches();
         ModulesHelper::setCaches();
 
+        static::mergeInstall();
+
         _update::deleteInstallFile();
+    }
+
+    public static function mergeInstall() {
+        if (is_file($file = __DIR__ . '/data/merge_install.php')) {
+            $idens = include $file;
+            if ($idens) {
+                foreach ($idens as $iden) {
+                    SupermanController::InstallOrUpdateModule($iden, '');
+                }
+            }
+        }
     }
 
     public static function getModuleInfo() {

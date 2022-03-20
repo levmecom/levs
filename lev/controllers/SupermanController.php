@@ -293,15 +293,17 @@ class SupermanController extends Controllerv {
         $ns = '\modules\\'.Modulesv::getIdenNs($iden, $classdir).'\migrations\_uninstall';
         Lev::setModule($iden, $classdir);
         Lev::actionObjectMethod($ns, [], 'actionUninstall');
-        ModulesHelper::delete(['identifier'=>$iden]);
-        SettingsHelper::delete(['moduleidentifier'=>$iden]);
+        if ($iden != 'levs') {
+            ModulesHelper::delete(['identifier' => $iden]);
+            SettingsHelper::delete(['moduleidentifier' => $iden]);
+        }
         is_file($filename = Lev::getAlias('@modules/' . $classdir . '/' . $iden . '.inc.php')) && @unlink($filename);
         if (Lev::GPv('forceDel')) {
             Modulesv::deleteModuleFile($iden, true, $classdir);
             //Modulesv::deleteModuleDir(ModulesHelper::getIdenDir($iden, $classdir));
         }
         ModulesHelper::isInstallModule('ftp') && ftpZipHelper::opCache($iden, '');
-        Lev::showMessage('恭喜，卸载成功！', installWidget::undz($iden), '', $referer);
+        Lev::showMessage('恭喜，卸载成功！', $iden != 'levs' ? installWidget::undz($iden) : '', '', $referer);
     }
 
     public static function actionEnableDzPlugin() {

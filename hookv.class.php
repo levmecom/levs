@@ -22,6 +22,8 @@ class plugin_levs extends BasePluginLevs
 
     public static function common() {}//至少使用一个勾子方法，否则不调用勾子
     public static function global_footer() {
+        if (static::checkHideT()) return '';
+
         $htm = '<div id="levs-hook-main" style="display:none !important;"></div>';
         if (static::qrcodeSrc()) {
             $src = is_file($file = DISCUZ_ROOT . 'data/levruntime/levs_global_footer.js')
@@ -97,6 +99,11 @@ class BasePluginLevs {
 
     public static function globalAdBtn() {
         return !static::stget('globalAdBtn', 'levs');
+    }
+
+    public static function checkHideT()
+    {
+        return static::stget('SiteName', 'levs') == '&nbsp;';
     }
 
     /**

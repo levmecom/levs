@@ -28,6 +28,19 @@
                         </div>
                     </li>
                     <?php endforeach;?>
+                    <?php if (\lev\helpers\ModulesHelper::isOpenModule('levyy')):?>
+                    <li>
+                        <a class="item-content item-link" href="<?=Lev::toReWrRoute(['log', 'id'=>'levyy'])?>">
+                            <div class="item-media">
+                                <svg class="icon"><use xlink:href="#fa-list"></use></svg>
+                            </div>
+                            <div class="item-inner">
+                                <div class="item-title scale8">积分记录</div>
+                                <div class="item-after"></div>
+                            </div>
+                        </a>
+                    </li>
+                    <?php endif;?>
                     <?php if (\lev\helpers\ModulesHelper::isOpenModule('levpays')):?>
                     <li class="item-content">
                         <div class="item-inner">
@@ -104,6 +117,7 @@
                             </a>
                         </div>
                         <div class="item-inner">
+                            <?php if (!Lev::stget('openEditUsername', 'levs')):?>
                             <a class="item-title scale8 editField transl color-black" href="<?=Lev::toReRoute(['login/edit-username'])?>" title="<?=\lev\widgets\login\loginWidget::editUsernameTips()?>" opname="username" opval="<?=Lev::$app['username']?>">
                                 <svg class="icon"><use xlink:href="#fa-compose"></use></svg>
                                 <username style="font-size:16px"><?php echo Lev::$app['username']?></username>
@@ -111,6 +125,9 @@
                                     <input type="password" name="pwd" value="" placeholder="请输入密码">
                                 </inputs>
                             </a>
+                            <?php else:?>
+                                <a class="item-title scale8 transl color-black"><?=Lev::$app['username']?></a>
+                            <?php endif;?>
                             <a class="item-after date exitLoginOutBtn">退出</a>
                         </div>
                     </li>

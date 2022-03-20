@@ -42,9 +42,9 @@ if (!empty($ftpUpdateMud)) {
 <?php include __DIR__ .'/header_htm_authsite.php'; ?>
 <?php include __DIR__ .'/header_htm_update.php'; ?>
 
-<div class="card animated heartBeat no-hairlines ftpUpdateMud <?=$btns ? '' : 'hiddenx'?>">
+<div class="card no-hairlines ftpUpdateMud <?=$btns ? '' : 'hiddenx'?>">
     <div class="card-header bg-lightblue">
-        <div class="wdmin">新版本</div>
+        <div class="wdmin nowrap">FTP新版本</div>
         <div class="scale7 data-xtable">
             <div class="buttons-row newMudBtnsBox"><?=$btns?></div>
         </div>
@@ -72,8 +72,12 @@ jQuery(function () {
     Levme.onClick('.clearActionsZip', function () {
         var obj = this;
         myApp.confirm('您确定要【忽略所有新版本】吗？', function () {
-            Levme.ajaxv.getv('<?=Lev::toReRoute(['admin-modules/clear-tips', 'id'=>'levs'])?>', function () {
-
+            Levme.ajaxv.getv('<?=Lev::toReRoute(['admin-modules/clear-tips', 'id'=>'levs'])?>', function (data, status) {
+                if (status >0) {
+                    jQuery(obj).attr('storeUpdateMud')
+                        ? jQuery('.storeUpdateMud').remove()
+                        : jQuery('.ftpUpdateMud').remove();
+                }
             }, {storeUpdateMud:jQuery(obj).attr('storeUpdateMud')?1:0});
         });
     });

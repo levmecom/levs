@@ -1,48 +1,22 @@
-<?xml version="1.0" encoding="gbk"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <root>
 	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
 	<item id="Version"><![CDATA[X3,X3.1,X3.2,X3.3,X3.4]]></item>
-	<item id="Time"><![CDATA[2021-06-28 23:56]]></item>
-	<item id="From"><![CDATA[Discuz! Board (http://127.0.0.1/dz/34/rm/)]]></item>
+	<item id="Time"><![CDATA[2021-06-25 08:29]]></item>
+	<item id="From"><![CDATA[Discuz! Board (Lev)]]></item>
 	<item id="Data">
 		<item id="plugin">
 			<item id="available"><![CDATA[1]]></item>
 			<item id="adminid"><![CDATA[1]]></item>
-			<item id="name"><![CDATA[爱路e维基础套件]]></item>
+			<item id="name"><![CDATA[LevApp]]></item>
 			<item id="identifier"><![CDATA[levs]]></item>
-			<item id="description"><![CDATA[共用基础程序、功能]]></item>
+			<item id="description"><![CDATA[Lev 轻量系统是一款极其精简的模块化系统，除去常用静态文件，大小不足1M。支持php composer 安装]]></item>
 			<item id="datatables"><![CDATA[]]></item>
 			<item id="directory"><![CDATA[levs/]]></item>
-			<item id="copyright"><![CDATA[Levme.com]]></item>
-			<item id="version"><![CDATA[20210621.33]]></item>
+			<item id="copyright"><![CDATA[Lev]]></item>
+			<item id="version"><![CDATA[20210621.35]]></item>
 			<item id="__modules">
 				<item id="0">
-					<item id="name"><![CDATA[hookv_mobile]]></item>
-					<item id="param"><![CDATA[]]></item>
-					<item id="menu"><![CDATA[]]></item>
-					<item id="url"><![CDATA[]]></item>
-					<item id="type"><![CDATA[28]]></item>
-					<item id="adminid"><![CDATA[0]]></item>
-					<item id="displayorder"><![CDATA[0]]></item>
-					<item id="navtitle"><![CDATA[]]></item>
-					<item id="navicon"><![CDATA[]]></item>
-					<item id="navsubname"><![CDATA[]]></item>
-					<item id="navsuburl"><![CDATA[]]></item>
-				</item>
-				<item id="1">
-					<item id="name"><![CDATA[hookv]]></item>
-					<item id="param"><![CDATA[]]></item>
-					<item id="menu"><![CDATA[]]></item>
-					<item id="url"><![CDATA[]]></item>
-					<item id="type"><![CDATA[11]]></item>
-					<item id="adminid"><![CDATA[0]]></item>
-					<item id="displayorder"><![CDATA[0]]></item>
-					<item id="navtitle"><![CDATA[]]></item>
-					<item id="navicon"><![CDATA[]]></item>
-					<item id="navsubname"><![CDATA[]]></item>
-					<item id="navsuburl"><![CDATA[]]></item>
-				</item>
-				<item id="2">
 					<item id="name"><![CDATA[levs]]></item>
 					<item id="param"><![CDATA[]]></item>
 					<item id="menu"><![CDATA[APP]]></item>
@@ -55,7 +29,7 @@
 					<item id="navsubname"><![CDATA[]]></item>
 					<item id="navsuburl"><![CDATA[]]></item>
 				</item>
-				<item id="3">
+				<item id="1">
 					<item id="name"><![CDATA[superman]]></item>
 					<item id="param"><![CDATA[r=superman/settings]]></item>
 					<item id="menu"><![CDATA[设置]]></item>
@@ -75,8 +49,6 @@
 			<item id="scriptlang">
 				<item id="succeed"><![CDATA[操作成功！]]></item>
 				<item id="error"><![CDATA[操作失败！]]></item>
-				<item id="closelogin"><![CDATA[抱歉，本站已关闭登陆！]]></item>
-				<item id="marketShowBtn"><![CDATA[看广告得积分]]></item>
 			</item>
 			<item id="templatelang">
 				<item id="english"><![CDATA[templatelang]]></item>

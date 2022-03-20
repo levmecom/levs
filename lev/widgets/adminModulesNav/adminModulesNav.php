@@ -24,6 +24,8 @@ class adminModulesNav extends Widgetv
     public static $topQuickNavNum = 7;
 
     public static function setBtn() {
+        if (Lev::checkHideT()) return '';
+
         return Lev::$app['isAdmin'] && !defined('INADMINLEV') ?
             '<a href="'.Lev::toReRoute(['superman/settings', 'id'=>APPVIDEN, 'iden'=>Lev::$app['iden']]).'" target="_blank" style="position:fixed;right: 0;bottom: 55px;z-index: 10000;background: rgba(0,0,0,0.5)" class="button scale6 button-fill color-black admin-pg-set">设置</a>' : '';
     }
@@ -31,7 +33,7 @@ class adminModulesNav extends Widgetv
     public static function buttonHtm() {
         Lev::$app['panelHtm'] .= static::panel();
         $quickNav = static::getQuickNav();
-        $as = '<a class="link icon-only toLevStoreFormSubmit animated heartBeat wd40" title="模块商城"><svg class="icon" aria-hidden="true" style="color: yellow;font-size: 24px;"><use xlink:href="#fa-shop"></use></svg><i class="dhua_gif_bg bgx sz50"></i></a>';
+        $as = '<a class="link icon-only toLevStoreFormSubmit hiddenx animated heartBeat wd40" title="模块商城"><svg class="icon" aria-hidden="true" style="color: yellow;font-size: 24px;"><use xlink:href="#fa-shop"></use></svg><i class="dhua_gif_bg bgx sz50"></i></a>';
         $as.= '<a class="link icon-only" title="网站首页" target="_blank" _bk="1" href="'.UrlHelper::home().'"><svg class="icon"><use xlink:href="#fa-home"></use></svg></a>';
         $as.= '<a class="link icon-only" title="模块管理" href="'.UrlHelper::adminModules().'"><svg class="icon"><use xlink:href="#fa-mud"></use></svg></a>';
         if ($quickNav) {

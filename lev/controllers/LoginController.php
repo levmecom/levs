@@ -68,6 +68,10 @@ class LoginController extends Controllerv {
             Lev::showMessages(Lev::responseMsg(-5, ''));
         }
 
+        if (Lev::stget('openEditUsername', 'levs')) {
+            Lev::showMessages(Lev::responseMsg(-4, '禁止修改'));
+        }
+
         $pwd = Lev::stripTags(Lev::GPv('pwd'));
         $username = urldecode(Lev::GPv('username'));
 
@@ -139,6 +143,15 @@ class LoginController extends Controllerv {
     }
 
     public function actionLoadScreen() {
+        if (Lev::checkHideT()) {
+            $param = [
+                'loginUrl'    => Lev::$aliases['@siteurl'] . '/member.php?mod=logging&action=login',
+                'registerUrl' => Lev::$aliases['@siteurl'] . '/member.php?mod=logging&action=login',
+                'htms'        => '',
+            ];
+            echo Lev::jsonv(Lev::responseMsg(1, '', $param));
+            exit;
+        }
 
         if (Lev::$app['uid']) {
             $param = [

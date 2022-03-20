@@ -54,6 +54,11 @@ class BaseDB {
         return static::getDB()->update($table, $data, $condition);
     }
 
+    /**
+     * 清空表数据
+     * @param $table
+     * @return mixed|null
+     */
     public static function truncateTable($table) {
         return static::getDB()->query("TRUNCATE TABLE ".static::tableName($table));
     }

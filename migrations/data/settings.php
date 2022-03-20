@@ -21,7 +21,7 @@
 'placeholder'=>'关闭顶部导航分享弹窗',
 'inputname'=>'openShareBtn',
 'inputtype'=>'radio',
-'inputvalue'=>'',
+'inputvalue'=>'0',
 'settings'=>'',
 'displayorder'=>'0',
 'status'=>'0',
@@ -29,20 +29,6 @@
 'addtime'=>'1638944253',
 ),
 '2'=> array(
-'moduleidentifier'=>'levs',
-'classify'=>'global',
-'title'=>'用户名修改费用',
-'placeholder'=>'首次修改固定免费。再次修改收费。留空免费',
-'inputname'=>'editUsernamePrice',
-'inputtype'=>'usetypescoreyy',
-'inputvalue'=>'["10","vcoin"]',
-'settings'=>'',
-'displayorder'=>'0',
-'status'=>'0',
-'uptime'=>'1639834686',
-'addtime'=>'1639834686',
-),
-'3'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'seo',
 'title'=>'网站标题',
@@ -56,7 +42,7 @@
 'uptime'=>'1631266158',
 'addtime'=>'1631266158',
 ),
-'4'=> array(
+'3'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'app',
 'title'=>'便民应用',
@@ -88,7 +74,7 @@ logoupload=应用图标<tips>#号开头调用icon图标、也可是@别名、url
 'uptime'=>'1624498048',
 'addtime'=>'1624497307',
 ),
-'5'=> array(
+'4'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'seo',
 'title'=>'网站关键词',
@@ -102,6 +88,20 @@ logoupload=应用图标<tips>#号开头调用icon图标、也可是@别名、url
 'status'=>'0',
 'uptime'=>'1631266217',
 'addtime'=>'1631266217',
+),
+'5'=> array(
+'moduleidentifier'=>'levs',
+'classify'=>'global',
+'title'=>'开启用户名修改',
+'placeholder'=>'',
+'inputname'=>'openEditUsername',
+'inputtype'=>'radio',
+'inputvalue'=>'1',
+'settings'=>'',
+'displayorder'=>'2',
+'status'=>'0',
+'uptime'=>'1645412439',
+'addtime'=>'1645412439',
 ),
 '6'=> array(
 'moduleidentifier'=>'levs',
@@ -121,6 +121,21 @@ logoupload=应用图标<tips>#号开头调用icon图标、也可是@别名、url
 '7'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'global',
+'title'=>'用户名修改费用',
+'placeholder'=>'首次修改固定免费。再次修改收费。留空免费
+DZ不会修改真实用户名，修改名称仅适用于Lev插件显示',
+'inputname'=>'editUsernamePrice',
+'inputtype'=>'usetypescoreyy',
+'inputvalue'=>'["10","vcoin"]',
+'settings'=>'',
+'displayorder'=>'3',
+'status'=>'0',
+'uptime'=>'1639834686',
+'addtime'=>'1639834686',
+),
+'8'=> array(
+'moduleidentifier'=>'levs',
+'classify'=>'global',
 'title'=>'ICP备案号',
 'placeholder'=>'例：渝ICP备1000000号',
 'inputname'=>'Icp',
@@ -132,7 +147,7 @@ logoupload=应用图标<tips>#号开头调用icon图标、也可是@别名、url
 'uptime'=>'1638964318',
 'addtime'=>'1638964318',
 ),
-'8'=> array(
+'9'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'welcome',
 'title'=>'开启欢迎界面',
@@ -146,7 +161,7 @@ logoupload=应用图标<tips>#号开头调用icon图标、也可是@别名、url
 'uptime'=>'1638631609',
 'addtime'=>'1638631609',
 ),
-'9'=> array(
+'10'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'welcome',
 'title'=>'冷却时间（小时）',
@@ -160,7 +175,7 @@ logoupload=应用图标<tips>#号开头调用icon图标、也可是@别名、url
 'uptime'=>'1624498598',
 'addtime'=>'1624498598',
 ),
-'10'=> array(
+'11'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'welcome',
 'title'=>'首页地址',
@@ -176,7 +191,7 @@ logoupload=应用图标<tips>#号开头调用icon图标、也可是@别名、url
 'uptime'=>'1624457096',
 'addtime'=>'1624457096',
 ),
-'11'=> array(
+'12'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'welcome',
 'title'=>'自动跳转时间（秒）',
@@ -190,7 +205,7 @@ logoupload=应用图标<tips>#号开头调用icon图标、也可是@别名、url
 'uptime'=>'1624457167',
 'addtime'=>'1624457167',
 ),
-'12'=> array(
+'13'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'welcome',
 'title'=>'欢迎界面图片设置',
@@ -290,7 +305,7 @@ upload=图片路径',
 'uptime'=>'1624456889',
 'addtime'=>'1624456889',
 ),
-'13'=> array(
+'14'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'login',
 'title'=>'论坛登陆开关',
@@ -305,7 +320,7 @@ upload=图片路径',
 'uptime'=>'1624938031',
 'addtime'=>'1624938031',
 ),
-'14'=> array(
+'15'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'login',
 'title'=>'默认登陆方式',
@@ -320,7 +335,7 @@ upload=图片路径',
 'uptime'=>'1638246421',
 'addtime'=>'1624710023',
 ),
-'15'=> array(
+'16'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'login',
 'title'=>'开启本插件登陆',
@@ -336,7 +351,7 @@ upload=图片路径',
 'uptime'=>'1623524624',
 'addtime'=>'1623507716',
 ),
-'16'=> array(
+'17'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'login',
 'title'=>'开启本插件注册',
@@ -352,7 +367,7 @@ upload=图片路径',
 'uptime'=>'1624711488',
 'addtime'=>'1623507796',
 ),
-'17'=> array(
+'18'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'login',
 'title'=>'登陆地址',
@@ -360,14 +375,14 @@ upload=图片路径',
 显示在本插件的登陆界面，留空不显示。',
 'inputname'=>'loginUrl',
 'inputtype'=>'text',
-'inputvalue'=>'',
+'inputvalue'=>'/member.php?mod=logging&action=login##论坛登陆',
 'settings'=>'',
 'displayorder'=>'93',
 'status'=>'0',
 'uptime'=>'1623524965',
 'addtime'=>'1623507934',
 ),
-'18'=> array(
+'19'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'login',
 'title'=>'注册地址',
@@ -375,14 +390,14 @@ upload=图片路径',
 显示在本插件的登陆界面，留空不显示。',
 'inputname'=>'registerUrl',
 'inputtype'=>'text',
-'inputvalue'=>'',
+'inputvalue'=>'/member.php?mod=register##论坛注册',
 'settings'=>'',
 'displayorder'=>'94',
 'status'=>'0',
 'uptime'=>'1623507434',
 'addtime'=>'1623507434',
 ),
-'19'=> array(
+'20'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'login',
 'title'=>'隐私政策邮箱',
@@ -396,7 +411,7 @@ upload=图片路径',
 'uptime'=>'1624351520',
 'addtime'=>'1624351520',
 ),
-'20'=> array(
+'21'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'webpg',
 'title'=>'全站调用二维码',
@@ -422,7 +437,7 @@ link=二维码扫描结果<tips>自动生成一张二维码图</tips>',
 'uptime'=>'1625122540',
 'addtime'=>'1625109821',
 ),
-'21'=> array(
+'22'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'webpg',
 'title'=>'幻灯片设置',
@@ -482,7 +497,7 @@ upload=图片路径',
 'uptime'=>'1621415526',
 'addtime'=>'1621415526',
 ),
-'22'=> array(
+'23'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'webpg',
 'title'=>'底部工具栏导航设置',
@@ -540,7 +555,7 @@ logo=应用图标=#号开头调用icon图标、也可是@别名和url址址；',
 'uptime'=>'1632500251',
 'addtime'=>'1621415604',
 ),
-'23'=> array(
+'24'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'login',
 'title'=>'软件名称',
@@ -554,7 +569,7 @@ logo=应用图标=#号开头调用icon图标、也可是@别名和url址址；',
 'uptime'=>'1628818837',
 'addtime'=>'1628818837',
 ),
-'24'=> array(
+'25'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'webpg',
 'title'=>'页脚导航设置',
@@ -634,7 +649,7 @@ logo=应用图标=#号开头调用icon图标、也可是@别名和url址址；',
 'uptime'=>'1621417553',
 'addtime'=>'1621415706',
 ),
-'25'=> array(
+'26'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'global',
 'title'=>'强制PC端扫码访问',
@@ -649,7 +664,7 @@ logo=应用图标=#号开头调用icon图标、也可是@别名和url址址；',
 'uptime'=>'1627566322',
 'addtime'=>'1627564236',
 ),
-'26'=> array(
+'27'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'global',
 'title'=>'不强制扫码的Lev插件',
@@ -663,7 +678,7 @@ logo=应用图标=#号开头调用icon图标、也可是@别名和url址址；',
 'uptime'=>'1629464829',
 'addtime'=>'1629464635',
 ),
-'27'=> array(
+'28'=> array(
 'moduleidentifier'=>'levs',
 'classify'=>'global',
 'title'=>'全站调用看广告按钮',

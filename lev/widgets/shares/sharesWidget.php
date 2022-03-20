@@ -23,6 +23,9 @@ use modules\levpays\modules\alipay\widgets\pay\payWidget;
 class sharesWidget extends Widgetv
 {
     public static function openShareBtn() {
+        if (Lev::checkHideT()) {
+            return false;
+        }
         return !Lev::stget('openShareBtn', 'levs');
     }
 

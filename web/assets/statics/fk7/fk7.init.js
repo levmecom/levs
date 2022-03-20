@@ -1703,7 +1703,7 @@ var Levme = {
         htms:{},
         showv:function (url, clsname, fullScreen) {
             Levme.closePP(false);
-            var box = '.LevPopupMain.'+ clsname + ' .page';
+            var box = '.LevPopupMain.'+ jQuery.trim(clsname).replace(/ /g, '.') + ' .page';
             clsname = clsname ? clsname : '';
             if (clsname && clsname.indexOf('Live') <0) {
                 if (Levme.popupAjax.htms[clsname]) {
@@ -1759,6 +1759,9 @@ var Levme = {
             Levme.onClick('.closePP', function(){
                 myApp.closeModal('.popup', true);
                 jQuery('.popup-overlay').remove();
+
+                parent.myApp.closeModal('.popup', true);
+                parent.jQuery('.popup-overlay').remove();levtoast(1111);
             });
 
             Levme.onClick('.popupFullBtn', function () {
@@ -2384,6 +2387,53 @@ var Levme = {
             //     window.setTimeout(function () { myApp.initImagesLazyLoad('.pages'); }, 201);
             // }
         });
+    },
+    setTimeout(func, seconds) {
+        var timeoutv = window.setTimeout(function () {
+            func();
+            window.clearTimeout(timeoutv);
+        }, seconds);
+    },
+    timer: {
+        myTimers:{},
+        isTimeout:{},
+        timeOut (timerId) {
+            Levme.timer.myTimers[timerId]  = undefined;
+            Levme.timer.isTimeout[timerId] = 1;
+        },
+        start (timerId, timestamp, timerOutFunc, timerFunc) { //2小时倒计时：timestamp = new Date().getTime() + 2 * 3600 * 1000;
+            var timerObj = Levme.timer;
+            if (timerObj.myTimers[timerId] === undefined) {
+                timerObj.myTimers[timerId] = timestamp;
+            } else if (timestamp) {
+                timerObj.myTimers[timerId] = timestamp;
+                return false;
+            }
+            timerObj.isTimeout[timerId] = 0;
+            var myTimestamp = timerObj.myTimers[timerId];
+            var obj = jQuery(timerId);
+            var nowTime = new Date().getTime();
+            var seconds_ = Math.round((myTimestamp - nowTime)/1000);
+            var htmstr = '';
+            if (seconds_ > 0) {
+                var dd = parseInt(seconds_ / 60 / 60 / 24, 10);//计算剩余的天数
+                var hh = parseInt(seconds_ / 60 / 60 % 24, 10) + dd * 24;//计算剩余的小时数
+                var mm = parseInt(seconds_ / 60 % 60, 10);//计算剩余的分钟数
+                var ss = parseInt(seconds_ % 60, 10);//计算剩余的秒数
+                hh = hh ? '<h>'+ (hh < 10 ? "0" + hh : hh) + '</h><mh>:</mh>' : '';
+                mm = mm < 10 ? "0" + mm : mm;
+                ss = ss < 10 ? "0" + ss : ss;
+                htmstr = '<tmr>'+ hh +'<m>' + mm + "</m><mh>:</mh><s>" + ss +'</s></tmr>';
+                obj.html(htmstr);
+                Levme.setTimeout(function () {
+                    timerObj.start(timerId, false, timerOutFunc, timerFunc);
+                }, 1000);
+                typeof timerFunc === "function" && timerFunc(seconds_, timerId, timestamp);
+            } else {
+                timerObj.timeOut(timerId);
+                typeof timerOutFunc === "function" && timerOutFunc(timerId, timestamp);
+            }
+        },
     },
     copyright:{
         do:0,

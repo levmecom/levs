@@ -1,12 +1,12 @@
 <?php !defined('INLEV') && exit('Access Denied LEV');
  return array(
-'name'=>'Lev 轻量系统',
+'name'=>'LevApp',
 'identifier'=>'levs',
 'classdir'=>'0',
 'descs'=>'Lev 轻量系统是一款极其精简的模块化系统，除去常用静态文件，大小不足1M。支持php composer 安装',
 'copyright'=>'Lev',
-'version'=>'20210621.33',
-'versiontime'=>'1640858686',
+'version'=>'20210621.35',
+'versiontime'=>'1647770877',
 'settings'=>serialize(array (
   '_adminNavs' => 
   array (
@@ -51,7 +51,7 @@
       'id' => 'app',
       'order' => '0',
       'status' => '0',
-      'name' => '便民应用',
+      'name' => '网站导航',
       'descs' => '',
     ),
     'welcome' => 
@@ -98,11 +98,11 @@
   'dropTables' => 
   array (
   ),
-  '_navTitle' => '',
-  '_dzinstall' => '1',
+  '_navTitle' => 'APP',
+  '_dzinstall' => '0',
 )),
 'displayorder'=>'0',
 'status'=>'0',
-'uptime'=>'1640424390',
+'uptime'=>'1647770877',
 'addtime'=>'1638201511',
 );;

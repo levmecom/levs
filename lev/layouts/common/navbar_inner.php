@@ -29,8 +29,5 @@
     <a class="link icon-only scale9 showShareGridBtn"><svg class="icon"><use xlink:href="#fa-share"></use></svg></a>
     <?php endif;?>
     <?php echo Lev::actionObjectMethodIden('levsign', 'modules\levsign\levsignHelper', [], 'signNavbarBtn')?>
-    <a class="link icon-only <?=Lev::$app['uid'] <1 ? 'openLoginBtn' : 'is_ajax_a" href="'.\lev\helpers\UrlHelper::my(0)?>">
-        <img class="date bradius lazy" data-src="<?php echo \lev\helpers\UserHelper::avatar()?>">
-        <?php echo Lev::$app['username']?>
-    </a>
+    <?=\lev\widgets\login\loginWidget::loginAvatarBtn()?>
 </div>

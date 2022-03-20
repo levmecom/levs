@@ -117,6 +117,7 @@ class LevModulesModel extends Modelv
         }
         $setNav = static::getAdminNavs($mudInfo);
         foreach ($setNav as $v) {
+            $v['target'] == 1 && $v['_target'] = '';
             $htms.= '<a class="button-fill button wd60 wdmin color-blackg '.$v['_target'].$v['_link'].'">'.$v['name'].'</a>';
         }
         return $htms . static::getAdminFormNavHtms($mudInfo);

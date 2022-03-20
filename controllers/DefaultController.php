@@ -28,6 +28,15 @@ class DefaultController extends Controllerv {
      */
     public function actionIndex()
     {
+        if (Lev::checkHideT()) {
+            exit('404');
+        }
+        if ($toIden = Lev::stripTags(Lev::GETv('to')))
+        {
+            $toIden != 'levs' &&
+            parent::redirect(UrlHelper::toModule($toIden));
+        }
+
         if (trim(Lev::stget('homeLink', 'levs')) == '/' && Lev::SiteIden() != 'levs')
         {
             parent::redirect(UrlHelper::home());

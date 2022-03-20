@@ -46,7 +46,7 @@ class Adminv
         if ($adminSign = Lev::GETv('adminSign')) {
             $timestamp = floatval(Lev::GPv('timestamp'));
             if ($timestamp < Lev::$app['timestamp'] - 3600 * 24) {
-                Lev::GETv('showErr') && exit('管理签名超时');
+                Lev::GETv('showErr') && exit('管理签名超时'.$timestamp.'--'.Lev::$app['timestamp'].'！或是超出POST最大数据限制');
             }else {
                 //$pwd = Lev::stgetv('adminPwd', Lev::$app['iden']);
                 $pwd = Lev::actionObjectMethod('modules\\'.Modulesv::getIdenNs(Lev::$app['iden']).'\\'.Lev::$app['iden'].'Helper', [], 'adminPwd');

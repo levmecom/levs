@@ -62,7 +62,7 @@ echo \lev\base\Assetsv::highlight(1),
                 // 挂载highlight插件
                 typeof hljs !== "undefined" && (editor.highlight = hljs);
 
-                editor.config.placeholder = '<?php echo $input['placeholder']?>';
+                editor.config.placeholder = <?php echo json_encode($input['placeholder'], JSON_UNESCAPED_UNICODE)?>;
 
                 editor.create();
 

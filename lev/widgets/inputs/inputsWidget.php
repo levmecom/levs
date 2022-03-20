@@ -71,7 +71,7 @@ class inputsWidget extends Widgetv
         return method_exists(__CLASS__, $method) ? static::$method($name, $value, $v)
             : (Lev::classExists('modules\levfm\widgets\inputs\inputsFormWidget')
                 ? inputsFormWidget::input($type, $name, $value, $v)
-                : '<b class=red>未知input类型 &raquo; '.$type.'</b>'
+                : '<b class=red>未知input类型 &raquo; '.$type.'</b> 需要安装【levfm】表单模块'
             );
     }
 

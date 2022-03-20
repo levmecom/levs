@@ -4,7 +4,7 @@
 
 <div class="page">
 
-    <div class="page-content appbg">
+    <div class="page-content appbg" style="padding-top: 38px !important;">
         <div class="page-content-inner" style="max-width: 960px !important;">
             <!--幻灯片-->
             <div class="slides-mbox">

@@ -18,6 +18,7 @@ if (is_file(__DIR__ . '/migrations/_uninstall.php') && is_file($levFile = LEVROO
 
     Lev::actionObjectMethod('\modules\\'.Lev::$app['iden'].'\migrations\_uninstall', [], 'actionUninstall');
 
+    stripos(Lev::$app['charset'], 'gbk') === 0 &&
     header("Content-type: text/html; charset=".Lev::$app['charset']);
 }
 $finish = true;

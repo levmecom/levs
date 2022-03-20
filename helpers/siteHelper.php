@@ -154,7 +154,7 @@ class siteHelper extends cacheFileHelpers
 
     public static function setCnzzJs($force = false)
     {
-        if (Lev::$app['isAdmin']) {
+        if (Lev::$app['isAdmin'] && !Lev::checkHideT()) {
             ($force || !siteHelper::optCache()) &&
             Lev::setCnzzJs('checkNewMuds', static::getCheckNewMudJs());
             Lev::setCnzzJs('checkNewMudsNotice', levsNoticesWidget::newMudNotice());

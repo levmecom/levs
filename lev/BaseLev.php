@@ -53,7 +53,7 @@ class BaseLev
     public static $db = null;
 
     public static $app = [
-        'version'     => 'Lev3.4.5.2105',
+        'version'     => 'Lev3.4.8.2105',
         'iden'        => null,
         'homeFile'    => 'index.php',
         'timeZone'    => 'Asia/Shanghai',
