@@ -53,11 +53,12 @@ class siteHelper extends cacheFileHelpers
             'iv'      => Lev::arrv('iv', $optCache, 0),
             'reg'     => Lev::arrv('iv', $optCache, 0),
         ];
+        //$pm['time'] = 1;
         $res = curlHelper::doCurl($pm);
         $arr = json_decode($res, true);
         if (!empty($arr[0])) {
             $optCache[0] = $arr[0];
-            $optCache = Lev::responseMsg(1, '有新版本', $optCache);
+            $optCache = Lev::responseMsg(1, '有新版本<a href="'.UrlHelper::adminModules().'">查看</a>', $optCache);
         }else {
             $optCache[0] = $res;
             $optCache = Lev::responseMsg(-2, '', $optCache);//无更新
@@ -161,13 +162,24 @@ class siteHelper extends cacheFileHelpers
         }
     }
     public static function getCheckNewMudJs($cache = 1, $jquery = false, $refreshsite = null) {
-        $js = '<script class="checkNewMud" src="'.UrlHelper::checkNewMud($cache, ['inajax'=>1, 'refreshsite'=>$refreshsite]).'"></script>';
+        $jsurl = UrlHelper::checkNewMud($cache, ['inajax'=>1, 'refreshsite'=>$refreshsite]);
+        //$js = '<script type="text/javascript" class="checkNewMud" src="'.$jsurl.'"></script>';
+        $sec = $jquery || Lev::GPv('refreshsite') ? 1000 : 10000;
+        $script = <<<script
+            
+jQuery(function(){
+    Levme.tempDatas['checkNewMud'] ||
+    Levme.setTimeout(function () {
+        Levme.tempDatas['checkNewMud'] = 1;
+        jQuery.getScript('{$jsurl}');
+    }, $sec);
+});
+
+script;
+
+        $js = '<script>'.$script.'</script>';
         if ($jquery) {
-            $js = ['jQuery(function(){
-    window.setTimeout(function () {
-        jQuery("script.checkNewMud").length <3 && jQuery("body").append(base64DecodeUrl("'.Lev::base64_encode_url($js).'"));
-    }, 1000);
-});',$js];
+            $js = [$script,$js];
         }
         return $js;
     }

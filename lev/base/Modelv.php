@@ -193,7 +193,7 @@ class Modelv extends Migrationv
 
     public static function findOne($where, $field = '*') {
         is_array($where) && $where = static::createWhereFromArray($where);
-        $fullSql = "SELECT $field FROM ".static::tableName()." WHERE ".$where." LIMIT 1";
+        $fullSql = "SELECT $field FROM ".static::tableName()." WHERE ".$where;
         return dbHelper::findOne($fullSql);
     }
 

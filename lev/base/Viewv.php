@@ -20,6 +20,19 @@ class Viewv
 {
 
     /**
+     * Ajax 请求输出json数据，供popup弹窗调用
+     * @param $_FileName_
+     * @param array $_Param_
+     */
+    public static function renders($_FileName_, $_Param_ = []) {
+        if (Lev::GETv('ziframescreen') == '5' || Lev::isAjax()) {
+            Lev::showMessages(Lev::responseMsg(1, '', ['htms'=>Viewv::renderPartial($_FileName_, $_Param_)]));
+        }else {
+            Viewv::render($_FileName_, $_Param_);
+        }
+    }
+
+    /**
      * @param $_FileName_
      * @param array $_Param_
      */

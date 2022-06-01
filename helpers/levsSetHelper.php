@@ -14,6 +14,7 @@ namespace modules\levs\helpers;
 use Lev;
 use lev\helpers\ModulesHelper;
 use lev\helpers\SettingsHelper;
+use lev\widgets\adminModulesNav\adminModulesNav;
 
 !defined('INLEV') && exit('Access Denied LEV');
 
@@ -27,6 +28,18 @@ class BaseLevsSet {
             $arr[$v['identifier']] = $v['name'];
         }
         return $arr;
+    }
+
+    /**
+     * @see adminModulesNav::buttonHtm()
+     * @return bool
+     */
+    public static function showShopBtn() {
+        return !Lev::stget('showShopBtn', 'levs');
+    }
+
+    public static function showCheckNewBtn() {
+        return !Lev::stget('showCheckNewBtn', 'levs');
     }
 
     public static function Icp() {
@@ -96,6 +109,27 @@ class BaseLevsSet {
 
     public static function field_position() {
         return hookHelper::qrcodePosition();
+    }
+
+    /**
+     * @param $val
+     * @return bool
+     */
+    public static function checkLinkAccess($val) {
+        switch ($val) {
+            case 1 : $access = Lev::$app['uid'] >=1; break;
+            case 2 : $access = Lev::$app['isAdmin']; break;
+            default: $access = true; break;
+        }
+        return $access;
+    }
+
+    public static function setLinkAccess() {
+        return [
+            0 => '不限制',
+            1 => '登陆可见',
+            2 => '仅限管理员',
+        ];
     }
 
 }

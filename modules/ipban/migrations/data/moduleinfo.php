@@ -6,7 +6,7 @@
 'descs'=>'禁止IP直接EXIT，或者rewrite IP',
 'copyright'=>'Lev',
 'version'=>'20210919.03',
-'versiontime'=>'1638599694',
+'versiontime'=>'1651379696',
 'settings'=>serialize(array (
   '_adminNavs' => 
   array (
@@ -59,7 +59,6 @@
   ),
 )),
 'displayorder'=>'0',
-'status'=>'0',
 'uptime'=>'1638247212',
 'addtime'=>'1638247212',
 );;

@@ -89,7 +89,8 @@ class LevModulesModel extends Modelv
         $classify = Lev::GETv('classify');
         foreach ($setNav as $key => $name) {
             $color = $key == $classify ? ' color-blue' : ' color-gray';
-            $href = Lev::toReRoute(['superman/settings', 'id'=>APPVIDEN, 'iden'=>$iden, 'classify'=>$key]);
+            //$href = Lev::toReRoute(['superman/settings', 'id'=>APPVIDEN, 'iden'=>$iden, 'classify'=>$key]);
+            $href = UrlHelper::supermanSettings($iden, $key);
             $htms.= '<a class="button-fill button wd80 wdmin'.$color.'" href="'.$href.'">'.$name.'</a>';
         }
         $classify = Lev::GETv('r');
@@ -112,7 +113,8 @@ class LevModulesModel extends Modelv
         $htms = '';
         $setNav = static::getClassify($mudInfo['identifier'], 1);
         foreach ($setNav as $key => $name) {
-            $href = Lev::toReRoute(['superman/settings', 'id'=>APPVIDEN, 'iden'=>$mudInfo['identifier'], 'classify'=>$key]);
+            //$href = Lev::toReRoute(['superman/settings', 'id'=>APPVIDEN, 'iden'=>$mudInfo['identifier'], 'classify'=>$key]);
+            $href = UrlHelper::supermanSettings($mudInfo['identifier'], $key);
             $htms.= '<a class="button-fill button wd60 wdmin color-gray" href="'.$href.'">'.$name.'</a>';
         }
         $setNav = static::getAdminNavs($mudInfo);
@@ -129,6 +131,23 @@ class LevModulesModel extends Modelv
         if ($navs) {
             foreach ($navs as $v) {
                 $htms .= '<a class="button-fill button wd60 wdmin color-black" href="'.$v['link'].'">' . $v['name'] . '</a>';
+            }
+        }
+        return $htms;
+    }
+
+    public static function getPageNavHtms($mudInfo) {
+        $navs = static::getPageNavs($mudInfo);
+        $htms = '';
+        if ($navs) {
+            foreach ($navs as $v) {
+                $title = $v['descs'].'&#10;动态地址：'.$v['liveLink'];
+                $color = 'lightblue';
+                if (empty($v['gen'])) {
+                    $color = 'blue';
+                    $title = '&#10;&#10;自动生成的页面（深蓝色标注）';
+                }
+                $htms .= '<a class="button-fill button wd60 wdmin button-small color-'.$color.'" title="'.$title.'" target="_blank" _bk="1" href="'.$v['link'].'">' . $v['name'] . '</a>';
             }
         }
         return $htms;
@@ -196,6 +215,23 @@ class LevModulesModel extends Modelv
                     $route = Modelv::formRoute($v['formName'] ?: $v['formInputs']);
                     $v['link'] = Lev::toReRoute([$route, 'id' => $mudInfo['identifier']]);
                     $v['name'] = $v['title'] ?: $route;
+                    $res[$k] = $v;
+                }
+            }
+        }
+        return $res;
+    }
+
+    public static function getPageNavs($mudInfo) {
+        $navs = Lev::getSettings($mudInfo['settings'], '_pageNavs');
+        is_array($navs) || $navs = unserialize($navs);
+        $res = [];
+        if ($navs) {
+            foreach ($navs as $k => $v) {
+                if (!$v['status']) {
+                    $v['name'] = $v['name'] ?: $v['link'];
+                    $v['liveLink'] = Lev::toReRoute([$v['link'], 'id' => $mudInfo['identifier']]);
+                    $v['link'] = Lev::toReWrRoute([$v['link'], 'id' => $mudInfo['identifier']]);
                     $res[$k] = $v;
                 }
             }

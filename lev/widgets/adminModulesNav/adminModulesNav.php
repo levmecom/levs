@@ -33,14 +33,15 @@ class adminModulesNav extends Widgetv
     public static function buttonHtm() {
         Lev::$app['panelHtm'] .= static::panel();
         $quickNav = static::getQuickNav();
-        $as = '<a class="link icon-only toLevStoreFormSubmit hiddenx animated heartBeat wd40" title="模块商城"><svg class="icon" aria-hidden="true" style="color: yellow;font-size: 24px;"><use xlink:href="#fa-shop"></use></svg><i class="dhua_gif_bg bgx sz50"></i></a>';
+        $hiddenx = Lev::stget('showShopBtn', 'levs') ? 'hiddenx' : '';
+        $as = '<a class="link icon-only toLevStoreFormSubmit '.$hiddenx.' animated heartBeat wd40" title="模块商城"><svg class="icon" aria-hidden="true" style="color: yellow;font-size: 24px;"><use xlink:href="#fa-shop"></use></svg><i class="dhua_gif_bg bgx sz50"></i></a>';
         $as.= '<a class="link icon-only" title="网站首页" target="_blank" _bk="1" href="'.UrlHelper::home().'"><svg class="icon"><use xlink:href="#fa-home"></use></svg></a>';
         $as.= '<a class="link icon-only" title="模块管理" href="'.UrlHelper::adminModules().'"><svg class="icon"><use xlink:href="#fa-mud"></use></svg></a>';
         if ($quickNav) {
             $quickNav = array_slice($quickNav, 0, static::$topQuickNavNum);
             foreach ($quickNav as $v) {
                 $name = $v['icon'] ? '<svg class="icon" aria-hidden="true"><use xlink:href="#'.$v['icon'].'"></use></svg>' : Lev::cutString($v['title'], 2, '');
-                $as .= '<a class="link icon-only" href="'.$v['link'].'" title="'.$v['title'].'">'.$name.'</a>';
+                $as .= '<a class="link icon-only" href="'.$v['link'].'" title="'.$v['title'].'" hidetitle="1">'.$name.'</a>';
             }
         }
         return '<a class="link icon-only wd30 open-panel" title="后台导航">

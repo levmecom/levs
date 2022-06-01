@@ -6,7 +6,7 @@
 'descs'=>'SEO友好的URL规则，需设置rewrite规则',
 'copyright'=>'Lev',
 'version'=>'20211108.02',
-'versiontime'=>'1640577484',
+'versiontime'=>'1651379692',
 'settings'=>serialize(array (
   '_adminClassify' => 
   array (
@@ -49,7 +49,6 @@
   ),
 )),
 'displayorder'=>'0',
-'status'=>'0',
 'uptime'=>'1638247204',
 'addtime'=>'1638247204',
 );;

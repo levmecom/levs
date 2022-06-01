@@ -54,6 +54,9 @@ class Controllerv
             Lev::setNotices($msg.'！仅限管理员访问');
         }
 
+        $mudInfo['classdir'] && //环境检测不匹配 非管理员 直接Exit
+        Lev::actionObjectMethodIden($mudInfo['classdir'], 'modules\\'.$mudInfo['classdir'].'\helpers\EnvHelper', [], 'check');
+
         $controller = $c.'Controller';
         $className = static::controllerMaps($controller) ?:
             'modules\\'.Modulesv::getIdenNs(Lev::$app['iden'], $mudInfo['classdir']).'\controllers\\'.$controller;

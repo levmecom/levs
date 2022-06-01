@@ -67,7 +67,7 @@ echo \lev\base\Assetsv::animateCss(1);
                                     <?php echo $v['name']?>
                                     <svg class="icon color-gray"><use xlink:href="#fa-huoj"></use></svg>
                                 </a>
-                                <p class="date transl"><?php echo $v['version']?></p>
+                                <p class="date transl"><?php echo $v['version']?><absxg><?php echo $v['identifier']?></absxg></p>
                             </td>
 
                             <td>
@@ -144,7 +144,7 @@ echo \lev\base\Assetsv::animateCss(1);
                             <td>
                                 <absxk>组件</absxk><?php echo $v['name']?>
                             </td>
-                            <td><p class="date transl"><?php echo $v['version']?></p></td>
+                            <td><p class="date transl"><absx><?php echo $v['identifier']?></absx><?php echo $v['version']?></p></td>
 
                             <td>
                                 <p class="date transl"><?php echo $v['descs']?></p>

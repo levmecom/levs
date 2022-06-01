@@ -257,6 +257,11 @@ class BaseUrl {
         return Lev::toReWrRoute($pm);
     }
 
+    public static function supermanSettings($iden, $classify = '')
+    {
+        return Lev::toReRoute(['superman/settings', 'id'=>APPVIDEN, 'iden'=>$iden, 'classify'=>$classify]);
+    }
+
     public static function adminModules($iden = 'levs')
     {
         return Lev::toReWrRoute(['admin-modules', 'id'=>$iden]);

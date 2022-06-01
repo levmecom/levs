@@ -14,8 +14,9 @@ use modules\levs\controllers\AdminModulesController;
 //!defined('INLEV') && exit('Access Denied LEV');
 ?>
 
+<style>.popup .closePP.close-pp {display: none;}</style>
 
-<div class="page">
+<div class="page navbar-through">
     <div class="navbar">
         <div class="navbar-inner">
             <div class="left"></div>
@@ -38,6 +39,12 @@ use modules\levs\controllers\AdminModulesController;
                     <newcheckrs class="red">
                         <span class="wd100 progressbar-infinite color-multi"></span>
                     </newcheckrs>
+                </div>
+            </div>
+
+            <div class="card data-xtable">
+                <div class="card-header minheader">
+                    <a class="font14 openPP" href="<?=$showBtnSetUrl?>">按钮显示设置</a>
                 </div>
             </div>
 

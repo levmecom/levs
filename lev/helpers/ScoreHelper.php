@@ -43,16 +43,19 @@ class ScoreHelper
         return isset($icons[$key]) ? $icons[$key] : 'score';
     }
 
-    public static function scoretypes() {
-        isset(Lev::$app['scoretypes']) || Lev::$app['scoretypes'] = [];
+    public static function scoretypes($tip = '(DZ)') {
+        empty(Lev::$app['scoretypes']) && Lev::$app['scoretypes'] = static::scoretypesyy($tip);
         return Lev::$app['scoretypes'];
     }
 
     public static function scoretypesyy($tip = '（论坛）') {
         $scoretypes = Lev::actionObjectMethodIden('levyy', 'modules\levyy\table\userHelper', [], 'wealths') ?: [];
-        $scoretype = static::scoretypes();
-        foreach ($scoretype as $k => $name) {
-            $scoretypes['='.$k] = $name . $tip;
+        if (!empty(Lev::$app['isDiscuz'])) {//static::scoretypes();
+            if ($scoretype = Lev::actionObjectMethod('lev\dz\discuzHelper', [], 'scoretypes')) {
+                foreach ($scoretype as $k => $name) {
+                    $scoretypes['=' . $k] = $name . $tip;
+                }
+            }
         }
         return $scoretypes;
     }
@@ -63,7 +66,7 @@ class ScoreHelper
         return Lev::arrv($scoreid, $scoretypes);
     }
 
-    public static function scorename($scoreid, $yy = 0, $tip = '') {
+    public static function scorename($scoreid, $yy = 1, $tip = '') {
         $scoretypes = $yy ? static::scoretypesyy($tip) : static::scoretypes();
         return Lev::arrv($scoreid, $scoretypes);
     }
@@ -114,7 +117,8 @@ class ScoreHelper
     }
 
     public static function acscoreUses($spend, $notice = '', $scoretype = '', $uid = null, $title = '', $scoreArr = []) {
-        $uid === null && $uid = Lev::$app['uid'];
+        //$uid === null && $uid = Lev::$app['uid'];
+        !$uid && $uid = Lev::$app['uid'];
         if ($key = self::isSysscore($scoretype)) {
             $msg = static::acscoreUse($spend, $notice, $key, $uid, $title, $scoreArr);
         }else {

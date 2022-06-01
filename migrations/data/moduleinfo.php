@@ -6,7 +6,7 @@
 'descs'=>'Lev 轻量系统是一款极其精简的模块化系统，除去常用静态文件，大小不足1M。支持php composer 安装',
 'copyright'=>'Lev',
 'version'=>'20210621.35',
-'versiontime'=>'1647770877',
+'versiontime'=>'1653615950',
 'settings'=>serialize(array (
   '_adminNavs' => 
   array (
@@ -94,6 +94,14 @@
       'name' => 'SEO优化',
       'descs' => '',
     ),
+    'other' => 
+    array (
+      'id' => 'other',
+      'order' => '100',
+      'status' => '1',
+      'name' => '其它设置',
+      'descs' => '',
+    ),
   ),
   'dropTables' => 
   array (
@@ -102,7 +110,6 @@
   '_dzinstall' => '0',
 )),
 'displayorder'=>'0',
-'status'=>'0',
-'uptime'=>'1647770877',
+'uptime'=>'1647774742',
 'addtime'=>'1638201511',
 );;

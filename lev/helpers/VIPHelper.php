@@ -22,11 +22,22 @@ class BaseVIP {
         return $uid ? Lev::actionObjectMethodIden('levvv', 'modules\levvv\table\vipUserHelper', [$uid], 'myInfo') : [];
     }
 
-    public static function errorVipMessage($Lv, $vipInfo = null, $goodsId = null) {
+    public static function errorVipMessage($Lv, $vipInfo = null, $goodsId = null, $exit = false) {
         if (ModulesHelper::isInstallModule('levvv')) {
-            return vipUserHelper::errorVipMessage($Lv, $vipInfo, $goodsId);
+            $errMsg = vipUserHelper::errorVipMessage($Lv, $vipInfo, $goodsId);
+            $exit && $errMsg && Lev::showMessages($errMsg);
+            return $errMsg;
         }
         return Lev::responseMsg(-444, '未安装VIP模块', ['tourl'=>UrlHelper::storeView('levvv')]);
+    }
+
+    /**
+     * 未通过，它将直接退出程序
+     * @param $ckPm
+     * @param bool $force
+     */
+    public static function isVIPLink($ckPm, $force = true) {
+        Lev::actionObjectMethodIden('levvv', 'modules\levvv\helpers\setHelper', [$ckPm, $force], 'isVipLink');
     }
 }
 

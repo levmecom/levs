@@ -545,6 +545,7 @@ jQuery('textarea').dblclick(function(){
 });
 
 var Levme = {
+    tempDatas:{},
     animated:function (obj, animate) {
         var animated = 'animated '+ (animate ? animate : 'heartBeat');
         jQuery(obj).addClass(animated);
@@ -806,7 +807,7 @@ var Levme = {
                     hideIconLoader();
                     var status = 0;
                     if (data) {
-                        data.message && levtoast(data.message);
+                        Levme.viptoast(data);
 
                         status = parseInt(data.status);
                         if (status === -5) {
@@ -823,6 +824,39 @@ var Levme = {
                     errortips(data);
                 }
             });
+        }
+    },
+    viptoast(data, time) {
+        if (!data || !data.message ) {
+            return;
+        }
+        if (data.tourl) {
+            var btns = [{
+                text:data.message,
+                label:true,
+                close:true,
+                disabled:false,
+            }];
+            if (typeof data.tourl !== "string") {
+                for (var kname in data.tourl) {
+                    btns.push({
+                        text:kname,
+                        onClick:function () {
+                            window.location = data.tourl[kname];
+                        }
+                    });
+                }
+            }else {
+                btns.push({
+                    text:'确定',
+                    onClick:function () {
+                        window.location = data.tourl;
+                    }
+                });
+            }
+            myApp.actions(btns);
+        }else {
+            levtoast(data.message, time);
         }
     },
     screen:function(id, params) {
@@ -1606,6 +1640,7 @@ var Levme = {
         }
     },
     scrollLoad:{
+        tempPageDatas:{},
         init:function(loadBox) {
             loadBox && parseInt(jQuery(loadBox).find('.listLoadBox').attr('not')) === 1 && Levme.scrollLoad.setNothing(loadBox);
 
@@ -1635,6 +1670,7 @@ var Levme = {
                 myApp.attachInfiniteScroll(jQuery(loadBox));//给指定的 HTML 容器添加无限滚动事件监听器
                 jQuery(document).on('infinite', loadBox, function () {
                     if (!jQuery(loadBox).find('.infinite-scroll-preloader').hasClass('hiddenx')) {
+                        //myApp.detachInfiniteScroll(loadBox);//移除指定容器的无限滚动事件
                         return false;
                     }
                     page >= 2 && doInfiniteData();
@@ -1676,10 +1712,11 @@ var Levme = {
                         if (parseInt(data.status) === -5) {
                             openLoginScreen();
                         }else if (parseInt(data.status) >0 && data.htms) {
-                            jQuery(loadBox).find('.listLoadBox').attr('page', data.page ? data.page : page+1);
-                            virtualListBox.length <1 ?
-                                jQuery(loadBox).find('.listLoadBox').append('<div class="virtual-list">'+ data.htms +'</div>') :
-                                virtualListBox.append(data.htms);
+                            var nextPage = data.page ? data.page : page+1;
+                            var dataHtms = virtualListBox.length <1 ? '<div class="virtual-list">'+ data.htms +'</div>' : data.htms;
+                            Levme.scrollLoad.setTempPageDatas(url, page, dataHtms);
+                            jQuery(loadBox).find('.listLoadBox').attr('page', nextPage);
+                            virtualListBox.append(dataHtms);
                             window.setTimeout(function () {myApp.initImagesLazyLoad(loadBox);}, 101);
                         }
                         if (data.status === -1 || data.not || jQuery.trim(data.htms) === "") {
@@ -1694,6 +1731,12 @@ var Levme = {
                 });
             }
         },
+        setTempPageDatas(url, page, dataHtms) {
+            Levme.scrollLoad.tempPageDatas[base64EncodeUrl(url)+'_'+page] = dataHtms;
+        },
+        getTempPageDatas(url, page) {
+            return Levme.scrollLoad.tempPageDatas[base64EncodeUrl(url)+'_'+page];
+        },
     },
     closePP:function (animated) {
         myApp.closeModal('.popup', animated);
@@ -1703,7 +1746,12 @@ var Levme = {
         htms:{},
         showv:function (url, clsname, fullScreen) {
             Levme.closePP(false);
-            var box = '.LevPopupMain.'+ jQuery.trim(clsname).replace(/ /g, '.') + ' .page';
+            var className = jQuery.trim(clsname).replace(/ /g, '.');
+            if (jQuery('.popup.' + className).length >0) {
+                myApp.popup('.popup.' + className);
+                return;
+            }
+            var box = '.LevPopupMain.'+ className + ' .view';
             clsname = clsname ? clsname : '';
             if (clsname && clsname.indexOf('Live') <0) {
                 if (Levme.popupAjax.htms[clsname]) {
@@ -1716,9 +1764,11 @@ var Levme = {
             showIconLoader(true);
             Levme.ajaxv.getv(changeUrlArg(url, 'ziframescreen', 5), function (data, status) {
                 hideIconLoader();
-                var Htms = data.htms ? data.htms : data.message;
+                var closeBtn = '<a class="closePP close-pp"><svg class="icon"><use xlink:href="#fa-closer"></use></svg></a>';
+                var Htms = data.htms || data.message;
+                var PageHtms = jQuery(Htms).hasClass('page') ? Htms : '<div class="page">'+ Htms +'</div>';
                 var ppupHtml = '<div class="popup LevPopupMain '+clsname+full+'" style="'+rtbs+'">' +
-                    '<div class="view"><div class="page">'+ Htms +'</div></div></div>';
+                    '<div class="view">'+ closeBtn + PageHtms +'</div></div>';
                 clsname && status >0 && (Levme.popupAjax.htms[clsname] = ppupHtml);
                 Levme.popupAjax.openPopupActJs(box, ppupHtml);
             });
@@ -1761,7 +1811,7 @@ var Levme = {
                 jQuery('.popup-overlay').remove();
 
                 parent.myApp.closeModal('.popup', true);
-                parent.jQuery('.popup-overlay').remove();levtoast(1111);
+                parent.jQuery('.popup-overlay').remove();
             });
 
             Levme.onClick('.popupFullBtn', function () {
@@ -2070,6 +2120,9 @@ var Levme = {
             return maxNum;
         },
         addTabTr:function () {
+            Levme.onClick('.addRowBtn', function () {
+                jQuery('#'+ jQuery(this).attr('clickfor')).click();
+            });
             Levme.onClick('.addTabTr', function () {
                 var inId = Levme.tablesnav.getMaxId(jQuery(this).parents('tabbox').find('td.fd-id input')) +1;
 
@@ -2141,6 +2194,10 @@ var Levme = {
                 success: function(data){
                     hideIconLoader();
                     var status = parseInt(data.status);
+                    if (status === -5) {
+                        openLoginScreen();
+                        return false;
+                    }
                     if (status >0) {
                         levtoast(data.message);
                         !func && !data.notReload &&
@@ -2353,7 +2410,14 @@ var Levme = {
         function initCopy() {
             var clipboard = new ClipboardJS(cls, {
                 text: function(e) {
-                    return jQuery(e).attr('copy-txt') || jQuery(jQuery(e).attr('copy-input')).val();
+                    var copyTxt = jQuery(e).attr('copy-txt');
+                    if (!copyTxt) {
+                        var copyInput = jQuery(e).attr('copy-input');
+                        if (copyInput) {
+                            copyTxt = typeof copyInput === "function" ? copyInput(e) : jQuery(jQuery(e).attr('copy-input')).val();
+                        }
+                    }
+                    return copyTxt;
                 }
             });
 
@@ -2434,6 +2498,41 @@ var Levme = {
                 typeof timerOutFunc === "function" && timerOutFunc(timerId, timestamp);
             }
         },
+    },
+    setTransform(scale, winCls, boxCls, min1, min2) {
+        winCls = winCls || '.zoushi_container';
+        boxCls = boxCls || '.transformbox';
+        min1 = parseInt(min1) || 0.65;
+        min2 = parseInt(min2) || 0.72;
+
+        var winObj    = jQuery(winCls);
+        var boxObj    = jQuery(boxCls);
+        if (scale === undefined) {
+            var screen_wd = window.screen.availWidth;//屏幕可用工作区宽度window.screen.width;//手机获取可视宽度
+            var real_wd = boxObj.width();
+            var win_wd = winObj.width();//PC获取容器宽度
+            win_wd = win_wd < screen_wd ? win_wd : screen_wd;
+            var sf_wd = win_wd / real_wd;
+            var minScale = win_wd > 660 ? min1 : min2;
+            sf_wd = sf_wd < minScale ? minScale : sf_wd;
+            if (sf_wd < Levme.getScale(boxCls)) {
+                scale = sf_wd;
+            }
+        }
+        if (scale !== undefined) {
+            boxObj.css({transform: 'scale('+ scale +')'});
+            var height = boxObj.height() * scale;
+            winObj.css('height', height + 'px');
+        }
+    },
+    getScale(cls) {
+        var scale = 1;
+        var trans = jQuery(cls).css('transform');
+        if (trans && trans.indexOf(',') >0) {
+            var arr = trans.split(',');
+            scale = parseFloat(arr[3]) || scale;
+        }
+        return scale;
     },
     copyright:{
         do:0,

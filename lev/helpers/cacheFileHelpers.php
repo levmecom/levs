@@ -132,6 +132,13 @@ class cacheFileHelpers
         return [$md5, $subDir];
     }
 
+    /**
+     * 递归创建目录及文件
+     * @param $dir
+     * @param int $mode
+     * @param bool $makeindex
+     * @return bool
+     */
     public static function mkdirv($dir, $mode = 0777, $makeindex = false){
         if(!is_dir($dir)) {
             static::mkdirv(dirname($dir), $mode, $makeindex);

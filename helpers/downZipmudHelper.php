@@ -34,8 +34,8 @@ class downZipmudHelper extends ZipFileHelper
      * @see ApiController::actionDownloadZip()
      */
     public static function actionDownloadZip($iv, $iden, $classdir, $encrys) {
-        $levMudInfo = ModulesHelper::getModuleFileInfo('levs');
-        $idenMudInfo = ModulesHelper::getModuleFileInfo($iden);
+        $levMudInfo = ModulesHelper::getModuleInfo('levs');
+        $idenMudInfo = ModulesHelper::getModuleInfo($iden);
         $pm['url']      = UrlHelper::store(false).'/levs.php?id=levstore&r=api/download-zip&inajax=1&iv='.$iv.'&iden='.$iden.'&classdir='.$classdir;
         $pm['url']     .= '&Levv='.Lev::$app['version'].'&LevVersion='.$levMudInfo['version'].'&versiontime='.$idenMudInfo['versiontime'];
         $pm['url']     .= '&timestamp='.Lev::$app['timestamp'].'&adminSign='.Adminv::getAdminSign('levme.com', Lev::$app['timestamp']);

@@ -8,6 +8,48 @@ body .login-screen.a-to-login-screen .page-content {background:#fff url(../image
 
 .exitLoginOutBtn, .openLoginBtn, .dLoginBtn, .showShareGridBtn, .iconSelectWinBtn, .deleteOneBtn, .opCkboxBtn, .popupFullBtn, .openPP, .copyBtn,
 .openRegisterBtn, .editField {}
+.dosaveFormBtn, #saveForm, .swiper-no-swiping, .openPopupDrawingBtn {}
+
+.actions-modal {max-height: calc(100% - 80px);}
+@media (min-width: 496px) {
+    .actions-modal {
+        min-width: 480px;
+        width: min-content;
+        margin: auto;
+        left: 0;
+        right: 0;
+        max-width: calc(100% - 40px);
+    }
+}
+
+.popover,
+.modal,
+.modal-in {z-index: 2050000001 !important;}
+.popup-overlay {z-index: 2050000000 !important;}
+.popover,
+.actions-modal,
+.modal.modal-in {z-index: 2050000003 !important;}
+.modal-overlay {z-index: 2050000002 !important;}
+.closePP.close-pp {
+    z-index: 1000000000;
+    position: absolute;
+    color: #fff;
+    right: 0;
+    top: 0;
+    font-size: 20px;
+    display: flex;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    background: rgba(0,0,0,0.02);
+}
+.popup-bottom-x {max-height:calc(100% - 40px) !important;z-index:911001;}
+.popup-bottom-x2 {
+    box-shadow: 0 1px 2px rgba(0,0,0,.3);max-width: calc(100% - 40px);margin:0 auto;right: 0;left:0;top:unset !important;
+    bottom: 44px !important;
+    max-height: calc(100% - 84px) !important;
+}
 
 .borad { border-radius: 5px;}
 .iconSelectWinBox a {color: #fff; border:1px solid transparent;}
@@ -1270,6 +1312,9 @@ html.ios-gt-8 .data-xtable .data-xtable-title {
     min-width: 256px;
     font-size: 12px;
 }
+.form-mainb select.form-control {
+     max-width: 280px;
+ }
 .form-mainb .form-control.wd120 {min-width: 220px;}
 .form-mainb .form-control.wd60 {min-width:60px;}
 .form-mainb .card-footer {

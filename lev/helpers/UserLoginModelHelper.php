@@ -150,7 +150,9 @@ class UserLoginModelHelper extends Modelv
         if ($authInfo && count($authInfo = explode("\t", $authInfo)) >1) {
             $authCache = static::getAuthCache($authInfo[1]);
             if (isset($authCache['pwds'][$authInfo[0]])) {
-                Lev::$app['myInfo']   = $authCache['userDetail'];
+                Lev::$app['myInfo']        = $authCache['userDetail'];
+                Lev::$app['myInfo']['uid'] = $authInfo[1];
+
                 Lev::$app['username'] = $authCache['userDetail']['username'];
                 Lev::$app['uid']      = $authInfo[1];
                 if ($authCache[1] !== $authInfo[0] && !isset($authCache['ips'][$authCache[2]]) && $authCache[2] != Requestv::getRemoteIP()) {

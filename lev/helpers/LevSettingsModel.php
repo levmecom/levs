@@ -14,6 +14,7 @@ namespace lev\helpers;
 use Lev;
 use lev\base\Migrationv;
 use lev\base\Modelv;
+use modules\levs\helpers\levsSetHelper;
 
 !defined('INLEV') && exit('Access Denied LEV');
 
@@ -44,11 +45,15 @@ class LevSettingsModel extends Modelv
         return static::findAll("moduleidentifier='$iden' $where AND status=0 ORDER BY displayorder ASC");
     }
 
+    public static function setLinkAccess() {
+        return levsSetHelper::setLinkAccess();
+    }
+
     public static function field_scoretype() {
-        return ScoreHelper::scoretypes();
+        return ScoreHelper::scoretypesyy();
     }
     public static function setscoretype() {
-        return ScoreHelper::scoretypes();
+        return ScoreHelper::scoretypesyy();
     }
     public static function setscoretypesyy() {
         return ScoreHelper::scoretypesyy();

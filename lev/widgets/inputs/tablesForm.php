@@ -83,37 +83,39 @@ class tablesForm extends Widgetv
     {
         $childPre = 'cld__';
         $res = $result = [];
-        foreach ($tables as $field => $values) {
-            $data = $values['id'];
-            if ($data) {
-                $arr = [];
-                foreach ($values as $key => $fdv) {
-                    foreach ($data as $k => $id) {
-                        $id = intval($id);
-                        $arr[$id][$key] = isset($fdv['idk___'.$id]) ? $fdv['idk___'.$id] : $fdv[$k];
-                        $arr[$id]['id'] = $id;
+        if ($tables) {
+            foreach ($tables as $field => $values) {
+                $data = $values['id'];
+                if ($data) {
+                    $arr = [];
+                    foreach ($values as $key => $fdv) {
+                        foreach ($data as $k => $id) {
+                            $id = intval($id);
+                            $arr[$id][$key] = isset($fdv['idk___' . $id]) ? $fdv['idk___' . $id] : $fdv[$k];
+                            $arr[$id]['id'] = $id;
+                        }
                     }
+                    //$arr && array_key_exists('order', reset($arr)) && Lev::arraySorts($arr, ['order']);
+                    if ($arr) {
+                        $onearr = reset($arr);
+                        $orderKey = isset($onearr['order']) ? ['order', 'id'] : ['id'];
+                        Lev::arraySorts($arr, $orderKey);
+                    }
+                    $res[$field] = $arr;
+                    unset($addtr[$field]);
                 }
-                //$arr && array_key_exists('order', reset($arr)) && Lev::arraySorts($arr, ['order']);
-                if ($arr) {
-                    $onearr = reset($arr);
-                    $orderKey = isset($onearr['order']) ? ['order', 'id'] : ['id'];
-                    Lev::arraySorts($arr, $orderKey);
-                }
-                $res[$field] = $arr;
-                unset($addtr[$field]);
             }
-        }
-        foreach ($res as $field => $trs) {
-            if (strpos($field, $childPre) !== 0) {
-                $fieldstr = '_' . $field . '__' . $field;
-                $_trs = [];
-                foreach ($trs as $idk => $tr) {
-                    $idk = $tr['id'];
-                    isset($res[$childPre . $idk.$fieldstr]) && $tr[$childPre] = $res[$childPre . $idk.$fieldstr];
-                    $_trs[$idk] = $tr;
+            foreach ($res as $field => $trs) {
+                if (strpos($field, $childPre) !== 0) {
+                    $fieldstr = '_' . $field . '__' . $field;
+                    $_trs = [];
+                    foreach ($trs as $idk => $tr) {
+                        $idk = $tr['id'];
+                        isset($res[$childPre . $idk . $fieldstr]) && $tr[$childPre] = $res[$childPre . $idk . $fieldstr];
+                        $_trs[$idk] = $tr;
+                    }
+                    $result[$field] = $unserialize ? $_trs : serialize($_trs);
                 }
-                $result[$field] = $unserialize ? $_trs : serialize($_trs);
             }
         }
         if ($addtr) foreach ($addtr as $field => $v) $result[$field] = '';
@@ -185,7 +187,7 @@ class tablesForm extends Widgetv
         $trForm.= '<td class="tab-center"><button type="button" class="addTabTr" title="'.static::$addRowBtn.'" id="'.$addid.'" data-input="'.$v['inputname'].'">[+]</button></td>';
         $trForm.= '</tr></tbody>';
         $trForm.= '<tbody class="my-add-tr-btn newTabTrBox-'.$v['inputname'].'"><tr><td class="wd80" colspan="100" style="padding:0">
-<label for="'.$addid.'" class="wd80 button-fill button scale7 inblk addRowBtn wdmin">'.static::$addRowBtn.'</label>
+<label clickfor="'.$addid.'" class="wd80 button-fill button scale7 inblk addRowBtn wdmin">'.static::$addRowBtn.'</label>
 <label class="wd60 button-fill button color-black scale7 bigvBtn inblk">展开</label>
 </td></tr></tbody>';
         return [$header, $trForm];

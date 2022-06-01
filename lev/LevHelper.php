@@ -71,7 +71,7 @@ class LevHelper extends \lev\BaseLev
         return static::ckUserAgent('baiduboxapp/', $userAgent);
     }
     public static function checkAlipayUserAgent($userAgent = '') {
-        return static::ckUserAgent('AlipayClient/', $userAgent);
+        return static::ckUserAgent('AlipayClient/', $userAgent) || static::ckUserAgent('AliApp', $userAgent);//AlipayClient
     }
     public static function checkQqUserAgent($userAgent = '') {
         return static::ckUserAgent('MQQBrowser/', $userAgent) && static::ckUserAgent('QQ/', $userAgent);
@@ -412,6 +412,8 @@ html;
 
     public static function toCurrent(array $params = [], $scheme = true, $rewrite = true)
     {
+        isset($params['id']) && $params['id'] = Modulesv::getIdenRouteId($params['id']);
+
         $route = $_GET;
         $route[0] = Requestv::getScriptUrl();
         //$route = array_replace_recursive($route, $params);
@@ -505,10 +507,14 @@ html;
             $result = array_map($trim, $result);
         }
         if ($skipEmpty) {
-            // Wrapped with array_values to make array keys sequential after empty values removing
-            $result = array_values(array_filter($result, function ($value) {
-                return $value !== '';
-            }));
+//            // Wrapped with array_values to make array keys sequential after empty values removing
+//            $result = array_values(array_filter($result, function ($value) {
+//                return $value !== '';
+//            })); //在某些DZ论坛中出现array_filter函数去调用自动加载类spl_autoload_call($value)。
+            foreach ($result as $k => $v) {
+                if ($v === '') unset($result[$k]);
+            }
+            $result = array_values($result);
         }
 
         return $result;

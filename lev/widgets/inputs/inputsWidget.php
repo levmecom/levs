@@ -578,9 +578,12 @@ upload=图片路径';
     }
 
     public static function usetypescoreType($name, $value, $v) {
+        $scoretypes = ScoreHelper::scoretypes();
+        if (empty($scoretypes)) {
+            return static::usetypescoreyyType($name, $value, $v);
+        }
         !is_array($value) && $value = json_decode($value, true);
 
-        $scoretypes = ScoreHelper::scoretypes();
         $name       = tablesForm::inputName($name, $v);
         $box        = '<div class="flex-box usetypescoreb">';
         $input      = $box.'<input type="text" class="form-control wd120" name="'.$name.'[]" value="'.$value[0].'"/>';

@@ -50,28 +50,120 @@
 'inputname'=>'appLink',
 'inputtype'=>'tablesnav',
 'inputvalue'=>serialize(array (
+  1 => 
+  array (
+    'id' => '1',
+    'topstatus' => '1',
+    'order' => '1',
+    'name' => '管理员',
+    'target' => '1',
+    'LinkAccess' => '2',
+    'status' => '0',
+    'link' => '/levs.php?r=admin-modules',
+    'logoupload' => '#fa-gs',
+    'cld__' => 
+    array (
+      0 => 
+      array (
+        'id' => '1',
+        'topstatus' => '1',
+        'order' => '1',
+        'name' => '后台管理',
+        'target' => '1',
+        'LinkAccess' => '2',
+        'status' => '0',
+        'link' => '/levs.php?r=admin-modules',
+        'logoupload' => '#fa-manage',
+      ),
+    ),
+  ),
   4 => 
   array (
     'id' => '4',
-    'topstatus' => '0',
+    'topstatus' => '1',
     'order' => '1',
     'name' => '导航服务',
     'target' => '1',
+    'LinkAccess' => '0',
     'status' => '0',
     'link' => '',
     'logoupload' => '#fa-mofang',
+    'cld__' => 
+    array (
+      0 => 
+      array (
+        'id' => '406',
+        'topstatus' => '1',
+        'order' => '2',
+        'name' => '切换账号',
+        'target' => '1',
+        'LinkAccess' => '1',
+        'status' => '0',
+        'link' => '/levs.php?r=login/my',
+        'logoupload' => '#fa-login',
+      ),
+      1 => 
+      array (
+        'id' => '404',
+        'topstatus' => '1',
+        'order' => '4',
+        'name' => '会员中心',
+        'target' => '1',
+        'LinkAccess' => '0',
+        'status' => '0',
+        'link' => '/levs.php?r=login/my',
+        'logoupload' => '#fa-reg',
+      ),
+      2 => 
+      array (
+        'id' => '402',
+        'topstatus' => '1',
+        'order' => '402',
+        'name' => '大转盘',
+        'target' => '1',
+        'LinkAccess' => '1',
+        'status' => '1',
+        'link' => '/levs.php?id=levaward',
+        'logoupload' => '#fa-fudai',
+      ),
+      3 => 
+      array (
+        'id' => '403',
+        'topstatus' => '1',
+        'order' => '403',
+        'name' => '黄历',
+        'target' => '1',
+        'LinkAccess' => '0',
+        'status' => '1',
+        'link' => '/levs.php?id=levpart&r=almanac',
+        'logoupload' => '#fa-almanac',
+      ),
+      4 => 
+      array (
+        'id' => '405',
+        'topstatus' => '1',
+        'order' => '405',
+        'name' => '本地测试',
+        'target' => '1',
+        'LinkAccess' => '2',
+        'status' => '1',
+        'link' => 'http://192.168.0.103/levs/levs/web',
+        'logoupload' => '#fa-mofang',
+      ),
+    ),
   ),
 )),
 'settings'=>'topstatus=推荐
 order=排序===60
 name=名称===100
 target=打开方式==lev\\helpers\\SettingsHelper=100
+LinkAccess=权限==lev\\helpers\\SettingsHelper=100
 status=开关
 link=链接地址
 logoupload=应用图标<tips>#号开头调用icon图标、也可是@别名、url址址、上传</tips>',
 'displayorder'=>'2',
 'status'=>'0',
-'uptime'=>'1624498048',
+'uptime'=>'1653290166',
 'addtime'=>'1624497307',
 ),
 '4'=> array(
@@ -451,7 +543,7 @@ link=二维码扫描结果<tips>自动生成一张二维码图</tips>',
     'order' => '1',
     'name' => '幻灯片1',
     'target' => '4',
-    'status' => '0',
+    'status' => '1',
     'link' => 'https://levme.com',
     'upload' => 'https://dz.levme.com/source/plugin/levsd/web/assets/statics/images/slide-1.jpg',
   ),
@@ -529,10 +621,34 @@ upload=图片路径',
     'link' => '/forum.php',
     'logo' => '#fa-taolun',
   ),
-  3 => 
+  33 => 
   array (
-    'id' => '3',
-    'order' => '3',
+    'id' => '33',
+    'order' => '33',
+    'name' => 'VIP',
+    'target' => '1',
+    'ShowType' => '2',
+    'status' => '0',
+    'homeStatus' => '0',
+    'link' => '/levs.php?id=levvv',
+    'logo' => '#fa-vip',
+  ),
+  66 => 
+  array (
+    'id' => '66',
+    'order' => '66',
+    'name' => '黑科技',
+    'target' => '1',
+    'ShowType' => '2',
+    'status' => '0',
+    'homeStatus' => '0',
+    'link' => '/levs.php?id=bworld',
+    'logo' => '#fa-hkj',
+  ),
+  333 => 
+  array (
+    'id' => '333',
+    'order' => '333',
     'name' => '我的',
     'target' => '1',
     'ShowType' => '0',
@@ -692,5 +808,36 @@ logo=应用图标=#号开头调用icon图标、也可是@别名和url址址；',
 'status'=>'0',
 'uptime'=>'1629349351',
 'addtime'=>'1627902225',
+),
+'29'=> array(
+'moduleidentifier'=>'levs',
+'classify'=>'other',
+'title'=>'显示商店图标',
+'placeholder'=>'后台管理右上角显示发光的模块商店图标
+可直通模块商店',
+'inputname'=>'showShopBtn',
+'inputtype'=>'radio',
+'inputvalue'=>'1',
+'settings'=>'',
+'displayorder'=>'310',
+'status'=>'0',
+'uptime'=>'1647774849',
+'addtime'=>'1647774849',
+),
+'30'=> array(
+'moduleidentifier'=>'levs',
+'classify'=>'other',
+'title'=>'显示新版本检查',
+'placeholder'=>'【Lev模块管理】左下角处
+<tips>【注意】关闭后你将无法找到其它入口，请先收藏以下地址：
+{homeUrl}levs.php?id=levs&r=admin-modules/shop-set</tips>',
+'inputname'=>'showCheckNewBtn',
+'inputtype'=>'radio',
+'inputvalue'=>'0',
+'settings'=>'',
+'displayorder'=>'312',
+'status'=>'0',
+'uptime'=>'1647774936',
+'addtime'=>'1647774936',
 ),
 );

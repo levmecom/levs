@@ -35,7 +35,7 @@ if (!empty($ftpUpdateMud)) {
     .notification.notification-session .item-text.alert-info p,
     .notification.notification-session .item-text.alert-info div {display: inline-block !important;color: #31708f !important;font-size:12px}
     .item-text.alert-info tips {color: #c128b2 !important; font-size:14px !important;}
-    .notification.notification-session .item-text.alert-info {color: #c128b2 !important; font-size:14px !important;}
+    .notification.notification-session .item-text.alert-info {color: #c128b2 !important; font-size:12px !important;display: block;margin-left:5px}
 </style>
 
 <?php include __DIR__ .'/header_htm_down.php'; ?>
@@ -69,6 +69,7 @@ if (!empty($ftpUpdateMud)) {
     };
 
 jQuery(function () {
+
     Levme.onClick('.clearActionsZip', function () {
         var obj = this;
         myApp.confirm('您确定要【忽略所有新版本】吗？', function () {

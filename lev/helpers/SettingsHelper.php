@@ -34,6 +34,7 @@ class BaseSettings extends LevSettingsModel
                 case 3  : $attr = ' openziframescreen" hidetitle="1'; break;
                 case 4  : $attr = '" target="_blank" _bk="1'; break;
                 case 5  : $attr = ' is_ajax_a'; break;
+                case 12 : $attr = ' loadData'; break;
                 case 66 : $attr = ' openPP" clsname="c-'.md5($mySelfBtn); break;
                 case 99 : $attr = ' mySelfBtn '.$mySelfBtn; break;
                 default : $attr = '" target="'.$target; break;
@@ -54,6 +55,7 @@ class BaseSettings extends LevSettingsModel
             3  => '全屏弹窗',
             4  => '新窗口',
             5  => '切入（非APP页面无法显示）',
+            12 => '特定标签加载(tabView loadData)',
             66 => 'popupAjax',
             99 => '自定义JS按钮',
         ];

@@ -41,11 +41,11 @@ class loginWidget extends Widgetv
         return static::loadScreen($show);
     }
 
-    public static function loginAvatarBtn() {
+    public static function loginAvatarBtn($hideName = null) {
         $cls = Lev::$app['uid'] <1 ? 'openLoginBtn' : 'is_ajax_a" href="'.UrlHelper::my(0);
         return '<a class="link icon-only '.$cls.'">
                     <img class="date bradius lazy" data-src="'.UserHelper::avatar().'">
-                    '.Lev::$app['username'].'
+                    '.($hideName ? '' : Lev::$app['username']).'
                 </a>';
     }
 

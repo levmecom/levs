@@ -53,7 +53,7 @@ class BaseLev
     public static $db = null;
 
     public static $app = [
-        'version'     => 'Lev3.4.8.2105',
+        'version'     => 'Lev3.6.6.2105',
         'iden'        => null,
         'homeFile'    => 'index.php',
         'timeZone'    => 'Asia/Shanghai',
@@ -91,6 +91,7 @@ class BaseLev
         'scoretypes'  => [],
         'myScores'    => [],
 
+        'apiSiteurl'  => '',//来自API请求的站点首页地址
 
         'authkey' => '',
         'cookies' => [
@@ -377,6 +378,19 @@ class BaseLev
     public static function debug($all = false) {
         ini_set('display_errors', 1);
         $all ? error_reporting(E_ALL) : error_reporting(E_ALL ^ E_NOTICE);
+    }
+
+    public static function log($logFileDir, $data, $loop = false) {
+        $string = '';
+        if ($loop && is_array($data)) {
+            foreach ($data as $k => $v) {
+                $string .= $k . ' => ' . print_r($v, true) . "\r\n";
+            }
+        }else {
+            $string = print_r($data, true) . "\r\n";
+        }
+        $logFileDir || $logFileDir = Lev::$aliases['@runtime'];
+        file_put_contents($logFileDir . '/log.txt', $string, FILE_APPEND);
     }
 
     /**

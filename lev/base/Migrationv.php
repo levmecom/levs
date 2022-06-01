@@ -115,6 +115,14 @@ class Migrationv
         return "'" . addcslashes(str_replace("'", "''", $str), "\000\n\r\\\032") . "'";
     }
 
+    public static function setMyISAMtableOptions() {
+        return ' CHARACTER SET '.Lev::$app['db']['charset'].' ENGINE=MyISAM ';
+    }
+
+    public static function setInnoDBtableOptions() {
+        return ' CHARACTER SET '.Lev::$app['db']['charset'].' ENGINE=InnoDB ';
+    }
+
     public static function getLevBaseTableCreateSql($tableOptions = null) {
 
         $charset = Lev::$app['db']['charset'];

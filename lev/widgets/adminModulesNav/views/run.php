@@ -40,7 +40,7 @@ use lev\base\Adminv; ?>
                 </a>
                 <div class="accordion-item-content" style="background: rgba(0,0,0,0.04);">
                     <?php foreach ($quickNav as $v):?>
-                    <a class="item-content-32 item-content item-link quickNavOneBox" href="<?=$v['link']?>">
+                    <a class="item-content-32 item-content item-link quickNavOneBox" href="<?=$v['link']?>" target="_top" _bk="1">
                         <div class="item-media">
                             <svg class="icon color-orange"><use xlink:href="#<?=$v['icon']?>"></use></svg>
                         </div>

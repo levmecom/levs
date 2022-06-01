@@ -25,6 +25,9 @@ class Assetsv
     public static $registerCssFiles = [];
     public static $loaded = [];
 
+    public static $cssSrc = [];
+    public static $jsSrc  = [];
+
     public static $mudwebassets = '/data/assets/';
 
     public static function getAppassets($iden = '') {
@@ -47,6 +50,12 @@ class Assetsv
          return '';
     }
 
+    /**
+     * @param $iden
+     * @param bool $bak
+     * @param bool $classdir
+     * @return array
+     */
     public static function moveMudAssets($iden, $bak = false, $classdir = false) {
         if (empty(Lev::$app['isDiscuz'])) {
             $idenDir =  Modulesv::getIdenDir($iden, $classdir);
@@ -81,6 +90,56 @@ class Assetsv
             return @rmdir($path);
         }
         return @unlink($path);
+    }
+
+    public static function getAssetsFileRoot($iden, $fileName = null, $type = 'css') {
+        $fileName === null && $fileName = Controllerv::$route;
+        return Lev::$aliases['@runtime'] . '/assets_file/' . ModulesHelper::getIdenDir($iden) . '/'.$fileName.'.'.$type.'.php';
+    }
+    public static function getAssetsJsFile($iden, $fileName = null) {
+        $css = '';
+        if (is_file($assetsFile = static::getAssetsFileRoot($iden, $fileName, 'js'))) {
+            $css = include $assetsFile;
+        }
+        return $css;
+    }
+    public static function getAssetsCssFile($iden, $fileName = null) {
+        $js = '';
+        if (is_file($assetsFile = static::getAssetsFileRoot($iden, $fileName, 'css'))) {
+            $js = include $assetsFile;
+        }
+        return $js;
+    }
+
+    public static function writeAssetsToFile($iden, $fileName = null) {
+        $access = '!defined(\'INLEV\') && exit(\'Access Denied LEV\');';
+        $webroot = Lev::$aliases['@webroot'];
+        $web = Lev::$aliases['@web'];
+        $webLen = strlen($web);
+        if (static::$cssSrc) {
+            $css = '';
+            foreach (static::$cssSrc as $v) {
+                $v = Lev::getAlias($v);
+                $v = explode('?', $webroot . substr($v, $webLen))[0];
+                $css.= file_get_contents($v)."\r\n";
+            }
+            $css = '<?php '.$access.' return '.var_export($css, true).';';
+            $assetsFile = static::getAssetsFileRoot($iden, $fileName, 'css');
+            cacheFileHelpers::mkdirv(dirname($assetsFile));
+            file_put_contents($assetsFile, $css, LOCK_EX);
+        }
+        if (static::$jsSrc) {
+            $Js = '';
+            foreach (static::$jsSrc as $v) {
+                $v = Lev::getAlias($v);
+                $v = explode('?', $webroot . substr($v, $webLen))[0];
+                $Js.= file_get_contents($v)."\r\n";
+            }
+            $Js = '<?php '.$access.' return '.var_export($Js, true).';';
+            $assetsFile = static::getAssetsFileRoot($iden, $fileName, 'js');
+            cacheFileHelpers::mkdirv(dirname($assetsFile));
+            file_put_contents($assetsFile, $Js, LOCK_EX);
+        }
     }
 
     public static function loadCssFkv1() {
@@ -178,6 +237,8 @@ class Assetsv
     }
 
     public static function registerJsFile($src, $load = false) {
+        static::$jsSrc[$src] = $src;
+
         $src = Lev::getAlias($src);
         $str = '<script type="text/javascript" src="'.$src.'"></script>';
         $load && !isset(static::$registerJsFiles[$src]) && static::$loaded[md5($str)] = 1;
@@ -185,6 +246,8 @@ class Assetsv
     }
 
     public static function registerCssFile($src, $load = false) {
+        static::$cssSrc[$src] = $src;
+
         $src = Lev::getAlias($src);
         $str = '<link rel="stylesheet" type="text/css" href="'.$src.'" />';
         $load && !isset(static::$registerCssFiles[$src]) && static::$loaded[md5($str)] = 1;
